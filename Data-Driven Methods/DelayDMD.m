@@ -1,17 +1,27 @@
 % -------------------------------------------------------------------------
-% Time-Delay Coordinate Dynamic Mode Decomposition
+% Delay Coordinate Dynamic Mode Decomposition 
 %
-% ADD DESCRIPTION HERE
+% This code applies the delay-coordinate DMD approach to scalar time series.
+% There are two examples included: one synthetic example generated from a
+% simple linear span of sines and cosines with differing frequencies and 
+% another from the measurements of the nonlinear oscillations of the Van 
+% der Pol oscillator. We further take the SVD of the Hankel matrix 
+% associated to the Van der Pol measurements to demonstrate the nearly 
+% linear oscillation of the observables coming from the left singular
+% vectors in U.
+%
+% This script accompanies Section 2.2 of Computational Methods for
+% Dynamical Systems. 
 %
 % Author: Jason J. Bramburger
 % -------------------------------------------------------------------------
 
+% Clean workspace
+clear all; close all; clc
+
 %% Simple synthetic example -----------------------------------------------
 % Applying delay-cordinate DMD to a simple signal which is a linear 
 %  span of sines and cosines with random frequencies between 0 and 20.  
-
-% Clean workspace
-clear all; close all; clc
 
 % Generate data
 dt = 0.1;
