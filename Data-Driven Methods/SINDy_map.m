@@ -87,7 +87,7 @@ Xi = xnp1*pinv(Theta);
 %% Apply SINDy algorithm to obtain sparse model
 
 % Sparsity parameter
-lam = 0.005;
+lam = 0.01;
 
 k = 1;
 Xi_new = Xi;
