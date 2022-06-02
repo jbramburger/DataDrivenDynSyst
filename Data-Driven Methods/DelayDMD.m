@@ -125,9 +125,9 @@ end
 
 % Plot results
 figure('Position', [100, 500, 700, 250])
-plot(t,x(:,1),'b--','LineWidth',2)
+plot(t,x(:,1),'--','Color',[36/255 122/255 254/255],'LineWidth',2)
 hold on
-plot(t,xpred,'r','LineWidth',2)
+plot(t,xpred,'Color',[1 69/255 79/255],'LineWidth',2)
 xlabel('$t$','interpreter','latex')
 title(['$\tau =$ ', num2str(delays)],'interpreter','latex')
 set(gca,'Fontsize',16,'Xlim',[0, t(end)/2],'Ylim',[-2.2, 2.2])
@@ -146,27 +146,27 @@ xd = hankel(x(1:delays,1),x(delays:end,1));
 
 % Plot SVD Results
 figure('Position', [100, 500, 700, 500])
-subplot(3,1,1) % Singular values
+subplot(2,1,1) % Singular values
 plot(diag(S)/max(diag(S)),'ko','Linewidth',2)
 ylabel('$\sigma_j/\sigma_1$','interpreter','latex')
 title(['$\tau =$ ', num2str(delays)],'interpreter','latex')
 set(gca,'Fontsize',16,'Xlim',[0.9 min(delays+0.1,100+0.1)])
 
-subplot(3,1,2) % Right-singular vectors
-plot(t(1:end-delays+1),V(:,1),'r','Linewidth',2)
+subplot(2,1,2) % Right-singular vectors
+plot(t(1:end-delays+1),V(:,1),'Color',[1 69/255 79/255],'Linewidth',2)
 hold on
-plot(t(1:end-delays+1),V(:,2),'b--','Linewidth',2)
+plot(t(1:end-delays+1),V(:,2),'--','Color',[36/255 122/255 254/255],'Linewidth',2)
 xlabel('$t$','interpreter','latex')
 set(gca,'Fontsize',16,'Xlim',[0 t(end-delays)])
 legend('$v_1(t)$','$v_2(t)$','interpreter','latex')
-
-subplot(3,1,3) % Right-singular vectors
-plot(t(1:end-delays+1),V(:,3),'r','Linewidth',2)
-hold on
-plot(t(1:end-delays+1),V(:,4),'b--','Linewidth',2)
-xlabel('$t$','interpreter','latex')
-set(gca,'Fontsize',16,'Xlim',[0 t(end-delays)])
-legend('$v_3(t)$','$v_4(t)$','interpreter','latex')
+% 
+% subplot(3,1,3) % Right-singular vectors
+% plot(t(1:end-delays+1),V(:,3),'Color',[1 69/255 79/255],'Linewidth',2)
+% hold on
+% plot(t(1:end-delays+1),V(:,4),'--','Color',[36/255 122/255 254/255],'Linewidth',2)
+% xlabel('$t$','interpreter','latex')
+% set(gca,'Fontsize',16,'Xlim',[0 t(end-delays)])
+% legend('$v_3(t)$','$v_4(t)$','interpreter','latex')
 
 %% Time-Delay DMD on Low Rank Approximation of Hankel Matrix --------------
 

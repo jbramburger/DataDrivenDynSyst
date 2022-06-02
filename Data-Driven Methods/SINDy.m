@@ -45,11 +45,11 @@ x0 = [1;  2; rho - 1];
 % [t,xsol] = ode45(@(t,x) Rossler(x,a,b,c),t,x0,options);
 
 % Add noise
-var = 0.1; % noise variance
+var = 0.001; % noise variance
 xsol = xsol + sqrt(var)*randn(size(xsol));
 xsol = xsol'; % change dimensions to match theory
 
-%% Load saved noisy data to reproduce result in the book
+%% Load saved noisy data to reproduce result in the text
 
 %load LorenzNoise.mat
 
