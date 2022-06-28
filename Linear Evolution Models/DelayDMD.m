@@ -10,7 +10,7 @@
 % linear oscillation of the observables coming from the left singular
 % vectors in U.
 %
-% This script accompanies Section 2.1.1 of Computational Methods for
+% This script accompanies Section 2.2 of Computational Methods for
 % Dynamical Systems. 
 %
 % Author: Jason J. Bramburger

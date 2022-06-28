@@ -77,7 +77,7 @@ plot(zeros(length(line),1),line,'k','Linewidth',2) % imaginary axis
 hold on
 plot(line,zeros(length(line),1),'k','Linewidth',2) % real axis
 plot(xcos,ysin,'k--','LineWidth',2) % unit circle
-plot(mu,'r.','Markersize',20)
+plot(mu,'.','Color',[1 69/255 79/255],'Markersize',30)
 xlabel('Re(\mu)')
 ylabel('Im(\mu)')
 set(gca,'FontSize',16,'Xlim',[-1.2 1.2],'Ylim',[-1.2 1.2])
@@ -112,7 +112,7 @@ plot(zeros(length(line),1),line,'k','Linewidth',2) % imaginary axis
 hold on
 plot(line,zeros(length(line),1),'k','Linewidth',2) % real axis
 plot(xcos,ysin,'k--','LineWidth',2) % unit circle
-plot(muu,'r.','Markersize',20)
+plot(muu,'.','Color',[1 69/255 79/255],'Markersize',30)
 xlabel('Re(\mu)')
 ylabel('Im(\mu)')
 set(gca,'FontSize',16,'Xlim',[-1.2 1.2],'Ylim',[-1.2 1.2])
