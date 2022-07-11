@@ -1,9 +1,22 @@
 % -------------------------------------------------------------------------
 % Neural Networks
 %
-% TBD
+% In this script we implement a neural network approximation of the
+% function f(x1,x2) = x1^2 + x2^2. The network architecture has two hidden
+% layers, the first with a logistic activation function and the second 
+% linear. The result is a network in the form w2*sigma(w1*x + b) which 
+% mimics Cybenko's universal approximators. Network training is performed 
+% by randomizing all network parameters and performing gradient descent. 
+% The loss function is taken to be the mean square error between the 
+% network output and the true output over all of the training data.   
 %
-% Sigmoid activation function
+% Note that results can potentially be improved by training longer (more 
+% gradient descent steps - 'steps' in script), using a larger width (n in 
+% script), and/or adjusting the learning rate (lr in script). 
+% 
+% To replicate the results from the text, load in the data from the file
+% nn_data.mat. This includes the training data, learned w1,w2, and b, the
+% loss over all gradient descent updates, and the learning rate (lr).
 %
 % This script accompanies Section 3.2 of Computational Methods for
 % Dynamical Systems. 
@@ -100,7 +113,6 @@ figure(2)
 hold on
 view(-45,25)
 surf(x1p,x2p,trainedNN)
-%plot3(x(1,:),x(2,:),y,'.','Color',[1 69/255 79/255],'MarkerSize',25)
 grid on
 alpha 0.8
 shading interp
