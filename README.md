@@ -1,2 +1,2 @@
-# CompDynSyst
-Corresponding scripts and notebooks to accompany the book Computational Methods for Dynamical Systems
+# DataDrivenDynSyst
+Corresponding scripts and notebooks to accompany the book Data-Driven Methods for Dynamical Systems
