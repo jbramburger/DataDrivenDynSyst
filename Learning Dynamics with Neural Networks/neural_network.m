@@ -18,8 +18,8 @@
 % nn_data.mat. This includes the training data, learned w1,w2, and b, the
 % loss over all gradient descent updates, and the learning rate (lr).
 %
-% This script accompanies Section 3.2 of Computational Methods for
-% Dynamical Systems. 
+% This script accompanies Section 3.2 of Data-Driven Methods for
+% Dynamic Systems. 
 %
 % Author: Jason J. Bramburger
 % -------------------------------------------------------------------------

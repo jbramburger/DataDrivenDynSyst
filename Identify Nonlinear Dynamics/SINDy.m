@@ -7,8 +7,8 @@
 % library, and then using the weak/integral SINDy formulation with a 
 % quadratic library. 
 %
-% This script accompanies Section 2.2 of Computational Methods for
-% Dynamical Systems. 
+% This script accompanies Section 3.1 of Data-Driven Methods for
+% Dynamic Systems. 
 %
 % To reproduce the noisy computations in the book load LorenzNoise.mat to
 % get the noisy Lorenz data.

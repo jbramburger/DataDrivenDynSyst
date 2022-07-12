@@ -10,8 +10,8 @@
 % systems. The second applies the method to the motions of Jupiter or
 % Saturn in their orbital plane about the sun.
 %
-% This script accompanies Section 3.3 of Data-Driven Methods for Dynamic 
-% Systems. 
+% This script accompanies Section 3.3 of Data-Driven Methods for
+% Dynamic Systems. 
 %
 % Jupiter and Saturn orbits are read in from the jupiter_data.mat and
 % saturn_data.mat files, respectively.

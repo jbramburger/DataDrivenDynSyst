@@ -8,8 +8,8 @@
 % 1) A stroboscopic map of a periodically driven model for an RC circuit. 
 % 2) A Poincare map of a planar model of the truncated Hopf normal form. 
 %
-% This script accompanies Section 2.3.1 of Computational Methods for
-% Dynamical Systems. 
+% This script accompanies Section 3.2 of Data-Driven Methods for
+% Dynamic Systems. 
 %
 % Author: Jason J. Bramburger
 % -------------------------------------------------------------------------

@@ -9,8 +9,8 @@
 % approach which seeks identify DMD matrix that is unitary by solving a 
 % Procrustes problem.
 %
-% This script accompanies Section 2.1 of Computational Methods for
-% Dynamical Systems. 
+% This script accompanies Section 2.1 of Data-Driven Methods for
+% Dynamic Systems. 
 %
 % Author: Jason J. Bramburger
 % -------------------------------------------------------------------------
