@@ -20,7 +20,7 @@ clear all; close all; clc
 
 
 %% Load Henon Prediction data
-load Henon_step=4_b=0_3
+load Henon_step=4_b=0_01
 
 %% Plot Prediction vs Truth
 
