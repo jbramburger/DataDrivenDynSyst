@@ -51,7 +51,7 @@ plot(x,U(:,end),'Color',[36/255 122/255 254/255],'LineWidth',5)
 hold on
 plot(x,ufinal,'k--','LineWidth',3)
 set(gca,'FontSize',16,'Xlim',[-1 1])
-legend('True Solution','PINN Solution')
+legend('PINN Solution','True Solution')
 
 % Compute sup error
 error = norm(U(:,end) - ufinal,'inf')
