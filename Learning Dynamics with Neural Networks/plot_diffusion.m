@@ -8,7 +8,7 @@
 %
 % To recreate the results from the text simply load in diffusion_sol.mat. 
 %
-% This script accompanies Section 4.4 of Data-Driven Methods for
+% This script accompanies Section 5.4 of Data-Driven Methods for
 % Dynamic Systems. 
 %
 % Author: Jason J. Bramburger
