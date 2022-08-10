@@ -11,6 +11,9 @@
 % This script accompanies Section 3.2 of Data-Driven Methods for
 % Dynamic Systems. 
 %
+% For applications of this method to other systems see the repository:
+%      https://github.com/jbramburger/Poincare-Maps
+%
 % Author: Jason J. Bramburger
 % -------------------------------------------------------------------------
 

@@ -16,6 +16,9 @@
 % Jupiter and Saturn orbits are read in from the jupiter_data.mat and
 % saturn_data.mat files, respectively.
 %
+% For applications of this method to other systems see the repository:
+%      https://github.com/jbramburger/Slow-Discovery
+%
 % Author: Jason J. Bramburger
 % -------------------------------------------------------------------------
 
