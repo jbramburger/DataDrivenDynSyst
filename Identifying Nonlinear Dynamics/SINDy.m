@@ -1,5 +1,6 @@
 % -------------------------------------------------------------------------
 % Sparse Identification of Nonlinear Dynamics (SINDy)
+% -------------------------------------------------------------------------
 %
 % This script applies the SINDy method of Proctor, Brunton, & Kutz (PNAS,
 % 2016) to data collected from the Lorenz or Rossler chaotic systems. The

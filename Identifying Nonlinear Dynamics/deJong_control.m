@@ -1,5 +1,6 @@
 % -------------------------------------------------------------------------
 % Stabilizing Periodic Orbits in the de Jong Map
+% -------------------------------------------------------------------------
 %
 % In this script we implement the method of linear matrix inequalities
 % (LMIs) to stabilize periodic orbits of the two-dimensional de Jong map:

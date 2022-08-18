@@ -1,16 +1,31 @@
 % -------------------------------------------------------------------------
 % Learning Parameter-Dependent Poincare Maps in the Sprott System
+% -------------------------------------------------------------------------
 %
-% We use the third-order chaotic ordinary differential equation:
+% We apply the periodic orbit stabilization method to the third-order 
+% chaotic ordinary differential equation:
 %
 %        x''' + mu*x'' - (x')^2 + x = 0,
 %
-% where mu is the bifurcation parameter. The user is directed to the paper
-% "Simplest dissipative chaotic flow" by J.C. Sprott (Phys. Lett. A, 228,
-% pp. 271-274, 1997) for a complete discussion of the system dynamics and 
-% its bifurcations. 
+% where mu is the bifurcation parameter. The method requires first using 
+% the SINDy method to discover a parameter-dependent Poincare mapping. With 
+% an explicit mapping, we can then identify its (unstable) periodic orbits
+% and stabilize them using the pole-placement method. In this script we 
+% stabilize both period 1 and 2 orbits, while the methods can be extended
+% to stabilize longer orbits in a straightforward way.
 %
-% TBD...
+% The primary focal parameter is mu = 2.06, for which the differential 
+% equations falls into a stable period 8 orbit. At this parameter value
+% there is (at least) an unstable period 1, 2, and 4 orbit. In the text the
+% methods are also applied to the parameter value mu = 2.05 using the same
+% mapping discovered for the focal value of 2.06. At mu = 2.05 the map is
+% chaotic and there are infinitely many periodic orbits that densely fill
+% the attractor. In theory, any one of these orbits could be stabilized
+% using the methods of this script.
+%
+% The user is directed to the paper "Simplest dissipative chaotic flow" by 
+% J.C. Sprott (Phys. Lett. A, 228, pp. 271-274, 1997) for a complete 
+% discussion of the system dynamics and its bifurcations. 
 %
 % This script accompanies Section 3.3 of Data-Driven Methods for
 % Dynamic Systems. 
@@ -32,7 +47,6 @@ addpath(genpath('YALMIP-master'))
 
 % Bifurcation parameter 
 mustar = 2.06;
-%mu = 2.08:0.001:2.12; % focal parameter = mustar = 2.10 (period 2 attractor)
 mu = 2.04:0.001:2.08; % focal parameter = mustar = 2.06 (period 8 attractor)
 
 %ODE generation parameters
@@ -183,7 +197,6 @@ z1 = double(fixed.z) + shift(2);
 m = 3; %Dimension of ODE
 dt = 0.005;
 tspan = 0:dt:100;
-options = odeset('RelTol',1e-12,'AbsTol',1e-12*ones(1,m));
 
 % Threshold value
 eta = 0.05;
@@ -203,9 +216,9 @@ end
 [~,sol] = ode45(@(t,x) Sprott(x,mu(1)),tspan,x0(1,:));
 
 % Initialize Controlled Solution
-xc = [];
-yc = [];
-zc = [];
+xc1 = [];
+yc1 = [];
+zc1 = [];
 
 % Controlled orbit
 kfinal = 50; % number of times the trajectory pierces Poincare section
@@ -216,9 +229,9 @@ for k = 2:kfinal
             ind = j+1;
             
             % Controlled solution
-            xc = [xc; sol(1:ind,1)];
-            yc = [yc; sol(1:ind,2)];
-            zc = [zc; sol(1:ind,3)];
+            xc1 = [xc1; sol(1:ind,1)];
+            yc1 = [yc1; sol(1:ind,2)];
+            zc1 = [zc1; sol(1:ind,3)];
             
             break
         end 
@@ -236,9 +249,9 @@ for k = 2:kfinal
 end
 
 % Last Iteration of Controlled solution
-xc = [xc; sol(1:ind,1)];
-yc = [yc; sol(1:ind,2)];
-zc = [zc; sol(1:ind,3)];
+xc1 = [xc1; sol(1:ind,1)];
+yc1 = [yc1; sol(1:ind,2)];
+zc1 = [zc1; sol(1:ind,3)];
 
 %% Identify period 2 orbit 
 
@@ -302,9 +315,9 @@ end
 [~,sol] = ode45(@(t,x) Sprott(x,mu(1)),tspan,x0(1,:));
 
 % Initialize Controlled Solution
-xc = [];
-yc = [];
-zc = [];
+xc2 = [];
+yc2 = [];
+zc2 = [];
 
 % Controlled orbit
 kfinal = 50; % number of times the trajectory pierces Poincare section
@@ -315,9 +328,9 @@ for k = 2:kfinal
             ind = j+1;
             
             % Controlled solution
-            xc = [xc; sol(1:ind,1)];
-            yc = [yc; sol(1:ind,2)];
-            zc = [zc; sol(1:ind,3)];
+            xc2 = [xc2; sol(1:ind,1)];
+            yc2 = [yc2; sol(1:ind,2)];
+            zc2 = [zc2; sol(1:ind,3)];
             
             break
         end 
@@ -337,9 +350,40 @@ for k = 2:kfinal
 end
 
 % Last Iteration of Controlled solution
-xc = [xc; sol(1:ind,1)];
-yc = [yc; sol(1:ind,2)];
-zc = [zc; sol(1:ind,3)];
+xc2 = [xc2; sol(1:ind,1)];
+yc2 = [yc2; sol(1:ind,2)];
+zc2 = [zc2; sol(1:ind,3)];
+
+%% Generate uncontrolled trajectory for comparison
+
+tspan = 1:dt:10*kfinal;
+y0(1,:) = [x1; 0; z1];
+[~,solu] = ode45(@(t,x) Sprott(x,mustar),tspan,y0(1,:),options);
+
+% Extract the attractor
+xu = solu(50000:end,1);
+yu = solu(50000:end,2);
+zu = solu(50000:end,3);
+
+%% Plot the resulting stabilized orbits
+
+figure(1)
+plot(xu,yu,'k','LineWidth',1)
+hold on
+plot(xc1,yc1,'Color',[1 69/255 79/255],'LineWidth',3)
+plot(xc2(end/2:end),yc2(end/2:end),'Color',[36/255 122/255 254/255],'LineWidth',3)
+set(gca,'FontSize',16,'Xlim',[-1.1 7])
+xlabel('$x$','interpreter','latex','FontSize',20)
+ylabel('$y$','interpreter','latex','FontSize',20)
+
+figure(2)
+plot(yu,zu,'k','LineWidth',1)
+hold on
+plot(yc1,zc1,'Color',[1 69/255 79/255],'LineWidth',3)
+plot(yc2(end/4:end/2),zc2(end/4:end/2),'Color',[36/255 122/255 254/255],'LineWidth',3)
+set(gca,'FontSize',16)
+xlabel('$y$','interpreter','latex','FontSize',20)
+ylabel('$z$','interpreter','latex','FontSize',20)
 
 %% fsolve command to identify periodic orbits
 

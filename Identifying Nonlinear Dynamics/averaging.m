@@ -1,5 +1,6 @@
 % -------------------------------------------------------------------------
 % Using SINDy to perform data-driven averaging
+% -------------------------------------------------------------------------
 %
 % This script applies the method of data-driven averaging to multiscale
 % time series data. The method relies on the assumption that the fast scale

@@ -1,5 +1,6 @@
 % -------------------------------------------------------------------------
 % Discovering Conserved Quantities
+% -------------------------------------------------------------------------
 %
 % The goal of this script is to discover conserved quantities from data
 % gather from a dynamical system. We illustrate with a simple 3D dynamical

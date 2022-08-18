@@ -1,5 +1,6 @@
 % -------------------------------------------------------------------------
 % SINDy applied to Poincare and stroboscopic mapping discovery
+% -------------------------------------------------------------------------
 %
 % This script applies the SINDy method to discovering discrete-time
 % iterative schemes that govern coarse-grained data from continuous-time 
