@@ -11,11 +11,12 @@
 % Author: Jason J. Bramburger
 % -------------------------------------------------------------------------
 
-% Clean workspace
-clear all; close all; clc
 
 %% Tent --> Logistic Conjugacy results 
 %   Date comes from Tent2Logistic.ipynb notebook
+
+% Clean workspace
+clear all; close all; clc
 
 load Tent2Logistic_Conj.mat 
 % --> Outputs are (x,y,xdecode)
@@ -49,8 +50,15 @@ legend('$\rho(x)$','$h^{-1}(x)$','Interpreter','Latex','Location','Best','FontSi
 set(gca,'FontSize',16,'Xlim',[0 1],'Ylim',[0 1])
 box on
 
+% Pointwise errors in plotted points
+conjError = max(abs(y - h'))
+invconjError = max(abs(xdecode - hinv'))
+
 %% Tent --> Sine Conjugacy results 
 %   Date comes from Tent2Sine.ipynb notebook
+
+% Clean workspace
+clear all; close all; clc
 
 load Tent2Sine_Conj.mat 
 % --> Outputs are (x,y,xdecode)
