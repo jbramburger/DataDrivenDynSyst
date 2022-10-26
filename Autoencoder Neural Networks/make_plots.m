@@ -13,7 +13,7 @@
 
 
 %% Tent --> Logistic Conjugacy results 
-%   Date comes from Tent2Logistic.ipynb notebook
+%   Data comes from Tent2Logistic.ipynb notebook
 
 % Clean workspace
 clear all; close all; clc
@@ -55,7 +55,7 @@ conjError = max(abs(y - h'))
 invconjError = max(abs(xdecode - hinv'))
 
 %% Tent --> Sine Conjugacy results 
-%   Date comes from Tent2Sine.ipynb notebook
+%   Data comes from Tent2Sine.ipynb notebook
 
 % Clean workspace
 clear all; close all; clc
@@ -84,13 +84,45 @@ ylabel('$x$','Interpreter','Latex')
 set(gca,'FontSize',16,'Xlim',[-1 0],'Ylim',[0 1])
 box on
 
+%% Discovering Koopman observables for global linearization 
+%   Data comes from Global_Linearization.ipynb notebook
 
+% Clean workspace
+clear all; close all; clc
 
+load koopObs_fixed.mat     %   <---- fixed/static eigenvalues
+%load koopObs_variable.mat %   <---- variable eigenvalues
+% --> Outputs are (x,koop)
+%        x = 16000 evenly spaced grid points in [-2,2]x[-2,2]
+%        y = encoder(x) - value of each of the 3 Koopman observables at
+%        each x
 
+[X1,X2] = meshgrid(-2:0.01:2,-2:0.01:2);
 
+% Plot Discovered Koopman Eigenfunctions
+figure(1)
+set(gcf, 'Position',  [300, 400, 700, 200])
 
+% Eigenfunction 1
+subplot(1,3,1)
+surf(X1,X2,reshape(koop(:,1),[401 401]))
+shading interp
+view(0,90)
+set(gca,'FontSize',14,'Xlim',[-2,2],'Ylim',[-2,2])
 
+% Eigenfunction 2
+subplot(1,3,2)
+surf(X1,X2,reshape(koop(:,2),[401 401]))
+shading interp
+view(0,90)
+set(gca,'FontSize',14,'Xlim',[-2,2],'Ylim',[-2,2])
 
+% Eigenfunction 3
+subplot(1,3,3)
+surf(X1,X2,reshape(koop(:,3),[401 401]))
+shading interp
+view(0,90)
+set(gca,'FontSize',14,'Xlim',[-2,2],'Ylim',[-2,2])
 
 
 
