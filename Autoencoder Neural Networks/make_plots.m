@@ -1,11 +1,9 @@
 % -------------------------------------------------------------------------
 % The purpose of this script is to make the plots corresponding to the
 % trained autoencoder neural networks. The plots take in data from the
-% corresponding jupyter notebooks and plot the results for presentation.
+% corresponding jupyter notebooks and plot the results for presentation. 
 %
-% To recreate the results from the text simply load in diffusion_sol.mat. 
-%
-% This script accompanies Section 6 of Data-Driven Methods for
+% This script accompanies Chapter 6 of Data-Driven Methods for
 % Dynamic Systems. 
 %
 % Author: Jason J. Bramburger
@@ -84,14 +82,14 @@ ylabel('$x$','Interpreter','Latex')
 set(gca,'FontSize',16,'Xlim',[-1 0],'Ylim',[0 1])
 box on
 
-%% Discovering Koopman observables for global linearization 
+%% Koopman eigenfunctions for global linearization 
 %   Data comes from Global_Linearization.ipynb notebook
 
 % Clean workspace
 clear all; close all; clc
 
-load koopObs_fixed.mat     %   <---- fixed/static eigenvalues
-%load koopObs_variable.mat %   <---- variable eigenvalues
+%load koopObs_fixed.mat     %   <---- fixed/static eigenvalues
+load koopObs_variable.mat %   <---- variable eigenvalues
 % --> Outputs are (x,koop)
 %        x = 16000 evenly spaced grid points in [-2,2]x[-2,2]
 %        y = encoder(x) - value of each of the 3 Koopman observables at
