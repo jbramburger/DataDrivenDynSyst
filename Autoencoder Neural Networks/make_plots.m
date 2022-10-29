@@ -122,7 +122,45 @@ shading interp
 view(0,90)
 set(gca,'FontSize',14,'Xlim',[-2,2],'Ylim',[-2,2])
 
+%% Koopman eigenfunctions for global linearization (Complex eigenvalue case) 
+%   Data comes from Global_Linearization.ipynb notebook
 
+% Clean workspace
+clear all; close all; clc
+
+%load koopObs_fixed.mat     %   <---- fixed/static eigenvalues
+load koopObs_complex.mat %   <---- variable eigenvalues
+% --> Outputs are (x,koop)
+%        x = 16000 evenly spaced grid points in [-2,2]x[-2,2]
+%        y = encoder(x) - value of each of the 6 (3 real + 3 imaginary part) 
+%           Koopman observables at each x
+
+[X1,X2] = meshgrid(-2:0.01:2,-2:0.01:2);
+
+% Plot Discovered Koopman Eigenfunctions
+figure(1)
+set(gcf, 'Position',  [300, 400, 700, 200])
+
+% Exact Eigenfunction 1
+subplot(1,3,1)
+surf(X1,X2,reshape(X1,[401 401]))
+shading interp
+view(0,90)
+set(gca,'FontSize',14,'Xlim',[-2,2],'Ylim',[-2,2])
+
+% Eigenfunction 1 "Real Part"
+subplot(1,3,2)
+surf(X1,X2,reshape(koop(:,1),[401 401]))
+shading interp
+view(0,90)
+set(gca,'FontSize',14,'Xlim',[-2,2],'Ylim',[-2,2])
+
+% Eigenfunction 1 "Imaginary Part"
+subplot(1,3,3)
+surf(X1,X2,reshape(koop(:,2),[401 401]))
+shading interp
+view(0,90)
+set(gca,'FontSize',14,'Xlim',[-2,2],'Ylim',[-2,2])
 
 
 
