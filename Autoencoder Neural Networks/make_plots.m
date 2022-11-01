@@ -162,7 +162,38 @@ shading interp
 view(0,90)
 set(gca,'FontSize',14,'Xlim',[-2,2],'Ylim',[-2,2])
 
+%% Torus plot
 
+%Create R and THETA data
+theta = 0:pi/100:2*pi;
+r = 2*pi:pi/200:3*pi;
+[R,T] = meshgrid(r,theta);
+
+%Create top and bottom halves
+Z_top = 2*sin(R);
+Z_bottom = -2*sin(R);
+
+% Add in winding torus trajectory
+t = 80:0.1:300;
+x = (2.5*pi + 0.5*pi*cos(t)).*cos(t/pi);
+y = (2.5*pi + 0.5*pi*cos(t)).*sin(t/pi);
+z = 0.5*pi*sin(t);
+    
+%Convert to Cartesian coordinates and plot
+[X,Y,Z] = pol2cart(T,R,Z_top);
+surf(X,Y,Z);
+hold on;
+[X,Y,Z] = pol2cart(T,R,Z_bottom);
+surf(X,Y,Z);
+colormap gray
+alpha 0.8
+shading interp
+axis equal
+axis off
+
+% Plot trajectory on torus
+k = 230;
+plot3(x(1:k),y(1:k),z(1:k),'Color',[1 69/255 79/255],'LineWidth',2)
 
 
 
