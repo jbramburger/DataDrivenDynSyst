@@ -19,7 +19,7 @@
 % and so the Koopman expansion can be full realized using separation of
 % variables. 
 %
-% This script accompanies Section 2.4 of Data-Driven Methods for
+% This script accompanies Section 2.5 of Data-Driven Methods for
 % Dynamic Systems. 
 %
 % Author: Jason J. Bramburger
