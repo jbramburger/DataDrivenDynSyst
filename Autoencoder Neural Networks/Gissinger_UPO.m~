@@ -1,0 +1,363 @@
+% -------------------------------------------------------------------------
+%
+% Extracting Unstable Periodic Orbits from the Gissinger System
+%
+% TBD. 
+%
+% This script accompanies Section 6.5 of Data-Driven Methods for
+% Dynamic Systems. 
+%
+% Author: Jason J. Bramburger
+% -------------------------------------------------------------------------
+
+%% Clean workspace
+close all
+clear all
+clc
+
+%% Period 1 Initial Guess
+
+% Gissinger parameters
+nu = 0.1;
+gam = 0.85;
+mu = 0.12;
+
+% Integrator initializations
+dt = 0.01;
+tspan = 0:dt:20;
+options = odeset('RelTol',1e-12,'AbsTol',1e-12*ones(1,3));
+
+% Initialize guess
+x0 = [-1.2179209 1.2179209 1.3286662];
+[~,sol] = ode45(@(t,x) Gissinger(x,mu,nu,gam),tspan,x0(1,:),options);
+
+for j = 1:length(sol(:,1))-1 
+   if  ((sol(j,1) + sol(j,2)) < 0) && ((sol(j+1,1) + sol(j+1,2)) >= 0)
+        ind = j+1;
+
+        % Truncate at next intersection with Poincare section
+        init = sol(1:ind,:);
+
+        break
+    end 
+end
+
+%% Period 2 Initial Guess
+
+% Gissinger parameters
+nu = 0.1;
+gam = 0.85;
+mu = 0.12;
+
+% Integrator initializations
+dt = 0.05;
+tspan = 0:dt:20;
+options = odeset('RelTol',1e-12,'AbsTol',1e-12*ones(1,3));
+
+% Initialize guess - 01 orbit
+x0(1,:) = [-1.073515 1.073515  1.1201103];
+x0(2,:) = [-1.2816105 1.2816105 1.4147233];
+
+% Initialize guess - 12 orbit
+x0(1,:) = [-1.1593777 1.1593777  1.247489];
+x0(2,:) = [-1.43768131 1.43768131 1.66258233];
+
+% Initialize guess - 02 orbit
+x0(1,:) = [-1.1006762 1.1006762 1.160484];
+x0(2,:) = [-1.4226933 1.4226933 1.6029335];
+
+[~,sol] = ode45(@(t,x) Gissinger(x,mu,nu,gam),tspan,x0(1,:),options);
+
+for j = 1:length(sol(:,1))-1 
+   if  ((sol(j,1) + sol(j,2)) < 0) && ((sol(j+1,1) + sol(j+1,2)) >= 0)
+        ind = j+1;
+
+        % Truncate at next intersection with Poincare section
+        init = sol(1:ind,:);
+
+        break
+    end 
+end
+
+% Initialize trajectory
+[~,sol] = ode45(@(t,x) Gissinger(x,mu,nu,gam),tspan,x0(2,:),options);
+
+for j = 2:length(sol(:,1))-1
+   if  ((sol(j,1) + sol(j,2)) < 0) && ((sol(j+1,1) + sol(j+1,2)) >= 0)
+        ind = j+1;
+
+        % Controlled solution
+        init = [init; sol(1:ind,:)];
+
+        break
+    end 
+end
+
+%% Period 3 Initial Guess
+
+% Gissinger parameters
+nu = 0.1;
+gam = 0.85;
+mu = 0.12;
+
+% Integrator initializations
+dt = 0.05;
+tspan = 0:dt:20;
+options = odeset('RelTol',1e-12,'AbsTol',1e-12*ones(1,3));
+
+% Initialize guess - 001 orbit
+x0(1,:) = [-1.0235752 1.0235752  1.039149];
+x0(2,:) = [-1.0818121 1.0818121 1.1322173];
+x0(3,:) = [-1.3238802 1.3238802 1.4743656];
+
+% Initialize guess - 002 orbit
+x0(1,:) = [-1.0275182 1.0275182  1.0456374];
+x0(2,:) = [-1.0889106 1.0889106 1.1433766];
+x0(3,:) = [-1.3570137 1.3570137 1.5177892];
+
+% Initialize guess - 012 orbit
+x0(1,:) = [-1.0456371 1.0456371 1.0748404];
+x0(2,:) = [-1.176175 1.176175  1.269483];
+x0(3,:) = [-1.3761501 1.3761501 1.543645];
+
+% Initialize guess - 011 orbit
+x0(1,:) = [-1.0505573 1.0505573 1.0827899];
+x0(2,:) = [-1.1940813 1.1940813 1.2949812];
+x0(3,:) = [-1.2935671 1.2935671 1.4306426];
+
+[~,sol] = ode45(@(t,x) Gissinger(x,mu,nu,gam),tspan,x0(1,:),options);
+
+for j = 1:length(sol(:,1))-1 
+   if  ((sol(j,1) + sol(j,2)) < 0) && ((sol(j+1,1) + sol(j+1,2)) >= 0)
+        ind = j+1;
+
+        % Truncate at next intersection with Poincare section
+        init = sol(1:ind,:);
+
+        break
+    end 
+end
+
+% Initialize trajectory
+[~,sol] = ode45(@(t,x) Gissinger(x,mu,nu,gam),tspan,x0(2,:),options);
+
+for j = 2:length(sol(:,1))-1
+   if  ((sol(j,1) + sol(j,2)) < 0) && ((sol(j+1,1) + sol(j+1,2)) >= 0)
+        ind = j+1;
+
+        % Controlled solution
+        init = [init; sol(1:ind,:)];
+
+        break
+    end 
+end
+
+% Initialize trajectory
+[~,sol] = ode45(@(t,x) Gissinger(x,mu,nu,gam),tspan,x0(3,:),options);
+
+for j = 2:length(sol(:,1))-1
+   if  ((sol(j,1) + sol(j,2)) < 0) && ((sol(j+1,1) + sol(j+1,2)) >= 0)
+        ind = j+1;
+
+        % Controlled solution
+        init = [init; sol(1:ind,:)];
+
+        break
+    end 
+end
+
+%% Period 4 Initial Guess
+
+% Gissinger parameters
+nu = 0.1;
+gam = 0.85;
+mu = 0.12;
+
+% Integrator initializations
+dt = 0.05;
+tspan = 0:dt:20;
+options = odeset('RelTol',1e-12,'AbsTol',1e-12*ones(1,3));
+
+% Initialize guess - 1112 orbit
+x0(1,:) = [-1.4952934 1.4952934  1.6964461];
+x0(2,:) = [-1.20747 1.20747 1.3139266];
+x0(3,:) = [-1.2420436 1.2420436 1.3622724];
+x0(4,:) = [-1.1428387 1.1428387 1.2215892];
+
+% Initialize guess - 0012 orbit
+x0(1,:) = [-1.4952934 1.0217707 1.0364347];
+x0(2,:) = [-1.20747 1.20747 1.3139266];
+x0(3,:) = [-1.2420436 1.2420436 1.3622724];
+x0(4,:) = [-1.1428387 1.1428387 1.2215892];
+
+
+[[]
+ [1.0475534 1.0779362]
+ [1.183928  1.2805532]
+ [1.3434799 1.4995136]]
+
+[~,sol] = ode45(@(t,x) Gissinger(x,mu,nu,gam),tspan,x0(1,:),options);
+
+for j = 1:length(sol(:,1))-1 
+   if  ((sol(j,1) + sol(j,2)) < 0) && ((sol(j+1,1) + sol(j+1,2)) >= 0)
+        ind = j+1;
+
+        % Truncate at next intersection with Poincare section
+        init = sol(1:ind,:);
+
+        break
+    end 
+end
+
+% Initialize trajectory
+[~,sol] = ode45(@(t,x) Gissinger(x,mu,nu,gam),tspan,x0(2,:),options);
+
+for j = 2:length(sol(:,1))-1
+   if  ((sol(j,1) + sol(j,2)) < 0) && ((sol(j+1,1) + sol(j+1,2)) >= 0)
+        ind = j+1;
+
+        % Controlled solution
+        init = [init; sol(1:ind,:)];
+
+        break
+    end 
+end
+
+% Initialize trajectory
+[~,sol] = ode45(@(t,x) Gissinger(x,mu,nu,gam),tspan,x0(3,:),options);
+
+for j = 2:length(sol(:,1))-1
+   if  ((sol(j,1) + sol(j,2)) < 0) && ((sol(j+1,1) + sol(j+1,2)) >= 0)
+        ind = j+1;
+
+        % Controlled solution
+        init = [init; sol(1:ind,:)];
+
+        break
+    end 
+end
+
+% Initialize trajectory
+[~,sol] = ode45(@(t,x) Gissinger(x,mu,nu,gam),tspan,x0(4,:),options);
+
+for j = 2:length(sol(:,1))-1
+   if  ((sol(j,1) + sol(j,2)) < 0) && ((sol(j+1,1) + sol(j+1,2)) >= 0)
+        ind = j+1;
+
+        % Controlled solution
+        init = [init; sol(1:ind,:)];
+
+        break
+    end 
+end
+
+%% Root finding algorithm
+
+% Start clock
+tic
+
+% Root finding algorithm
+T = dt*length(init(:,1)); % Initial guess for period
+N = length(init(:,1));
+
+% Time derivative
+D = sparse(1:N-1,[2:N-1 N],ones(N-1,1)/2,N,N);
+D(N,1) = 0.5; % Periodic BCs
+D = (D - D')/dt;
+
+% Add period to initial guess
+uinit = [];
+uinit = [init(:); T]; % Initial guess
+
+% fsolve options
+options=optimset('Display','iter','Jacobian','on','MaxIter',10000,'Algorithm','levenberg-marquardt','TolFun',1e-15,'TolX',1e-15);
+
+% call fsolve
+xNew = fsolve(@(x) Periodic(x,D,uinit,mu,nu,gam,N),uinit,options);
+
+toc %end timer
+
+% Recover solutions (flip x & y because the conjugacy flips them in
+% latent map)
+x1UPO = xNew(1:N); 
+x2UPO = xNew(N+1:2*N);
+x3UPO = xNew(2*N+1:3*N);
+period = T*xNew(end);
+
+% Plot the solution in 3D
+plot3([x1UPO; x1UPO],[x2UPO; x2UPO],[x3UPO; x3UPO],'Color',[36/255 122/255 254/255],'Linewidth',5)
+set(gca,'fontsize',16)
+xlabel('$x(t)$','Interpreter','latex','FontSize',20,'FontWeight','Bold')
+ylabel('$y(t)$','Interpreter','latex','FontSize',20,'FontWeight','Bold')
+zlabel('$z(t)$','Interpreter','latex','FontSize',20,'FontWeight','Bold')
+grid on
+
+%% Gissinger right-hand-side
+
+function dx = Gissinger(x,mu,nu,gamma)
+    
+    % Equilibria for scaling
+    xstar = sqrt(nu + gamma*sqrt(nu/mu));
+    ystar = sqrt(mu + gamma*sqrt(mu/nu));
+    zstar = -sqrt(nu*mu) - gamma;
+    
+    % Rescaled variables
+    x1hat = x(1)*xstar;
+    x2hat = x(2)*ystar;
+    x3hat = x(3)*zstar;
+
+    dx = [(mu*x1hat - x2hat*(x3hat + gamma))/xstar; (-nu*x2hat + x1hat*(x3hat + gamma))/ystar; (-x3hat + x1hat*x2hat)/zstar];
+    
+end
+
+%% Function whose roots are periodic orbits
+
+function [F,J] = Periodic(xin,D,xinit,mu,nu,gamma,N)
+
+  x = xin(1:N);
+  y = xin(N+1:2*N);
+  z = xin(2*N+1:3*N);
+  T = xin(end);
+  
+  % Equilibria for scaling
+  xstar = sqrt(nu + gamma*sqrt(nu/mu));
+  ystar = sqrt(mu + gamma*sqrt(mu/nu));
+  zstar = -sqrt(nu*mu) - gamma;
+
+  % Right-hand side
+  F(1:N) =  D*x - T*( (mu*x*xstar - ystar*y.*( z*zstar + gamma )) /xstar );
+  F(N+1:2*N) =  D*y - T*( (-nu*y*ystar + x*xstar.*(z*zstar + gamma))/ystar );
+  F(2*N+1:3*N) =  D*z - T*( (-z*zstar + xstar*ystar*x.*y)/zstar );
+  F(3*N+1) =  (dot(D*xinit(1:N),xinit(1:N)-x) + dot(D*xinit(N+1:2*N),xinit(N+1:2*N)-y) + dot(D*xinit(2*N+1:3*N),xinit(2*N+1:3*N)-z));
+
+  % Jacobian
+  if nargout > 1
+      e = ones(N,1);
+      
+      J = sparse(3*N+1,3*N+1);
+      
+      % First component
+      J(1:N,1:N) = D + spdiags( -T*mu*e , 0, N, N);
+      J(1:N,N+1:2*N) = spdiags( T*ystar*(z*zstar + gamma)/xstar, 0, N, N);
+      J(1:N,2*N+1:3*N) = spdiags( T*(ystar*zstar/xstar)*y , 0, N, N);
+      J(1:N,3*N+1) = -(mu*x*xstar - ystar*y.*(z*zstar + gamma))/xstar; 
+      
+      % Second component 
+      J(N+1:2*N,1:N) = spdiags( -T*xstar*(z*zstar + gamma)/ystar , 0, N, N);
+      J(N+1:2*N,N+1:2*N) = D + spdiags( T*nu*e , 0, N, N);
+      J(N+1:2*N,2*N+1:3*N) = spdiags( -T*x*xstar*zstar/ystar , 0, N, N); 
+      J(N+1:2*N,3*N+1) = -(-nu*y*ystar + x*xstar.*(z*zstar + gamma))/ystar; 
+      
+      % Third component
+      J(2*N+1:3*N,1:N) = spdiags( -T*xstar*ystar*y/zstar , 0, N, N);
+      J(2*N+1:3*N,N+1:2*N) = spdiags( -T*xstar*ystar*x/zstar , 0, N, N);
+      J(2*N+1:3*N,2*N+1:3*N) = D + spdiags( T*e , 0, N, N);
+      J(2*N+1:3*N,3*N+1) = -( (-z*zstar + xstar*ystar*x.*y)/zstar );
+      
+      % Fourth component
+      J(3*N+1,1:N) = -D*xinit(1:N);
+      J(3*N+1,N+1:2*N) = -D*xinit(N+1:2*N);
+      J(3*N+1,2*N+1:3*N) = -D*xinit(2*N+1:3*N);
+  end
+
+end
