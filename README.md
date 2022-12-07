@@ -9,5 +9,6 @@ Neural networks use TensorFlow 2. A tutorial is available at: https://github.com
 ## **Repository Contents**
 This repository currently contains four folders, each associated to a chapter of the text. They are organized as follows:
 
-- Chapter 2: [**Linear Evolution Models**](https://github.com/jbramburger/DataDrivenDynSyst/tree/main/Linear%20Evolution%20Models): This folder contains MATLAB scripts to reproduce the results from Chapter 2 of the textbook. Organization is as follows:
-    - TBD
+- Chapter 2: [**Linear Evolution Models**](https://github.com/jbramburger/DataDrivenDynSyst/tree/main/Linear%20Evolution%20Models): This folder contains MATLAB scripts to reproduce the results from Chapter 2 of the textbook. More details can be found in the heading of each script. Organization is as follows:
+    - DMD_Schrondinger.m applies dynamic mode decomposition to the Schrodinger PDE.
+    - windowDMD.m applies the windowed DMD method of Dylewsky et al. [**Reference**](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.99.063311)  
