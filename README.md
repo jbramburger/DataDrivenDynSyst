@@ -23,7 +23,7 @@ This repository currently contains four folders, each associated to a chapter of
     - averaging.m coarse-grains a multiscale signal (using window DMD) and implements the SINDy method to learn the slow-timescale evolution.
     - conserved_quantities.m implements the method [Kaiser et al.](http://eurika-kaiser.com/downloads/KaKuBr2018cdc.pdf) to learn conserved quantities from data 
 
-- **Chapter 4**: **COMING SOON**: This folder contains MATLAB scripts to reproduce the results from Chapter 4 of the textbook. More details can be found in the heading of each script. Organization is as follows:
+- **Chapter 4**: [**COMING SOON**]: This folder contains MATLAB scripts to reproduce the results from Chapter 4 of the textbook. More details can be found in the heading of each script. Organization is as follows:
     - 
 
 - **Chapter 5**: [**Learning Dynamics with Neural Networks**](https://github.com/jbramburger/DataDrivenDynSyst/tree/main/Learning%20Dynamics%20with%20Neural%20Networks): This folder contains MATLAB scripts and Jupyter notebooks to reproduce the results from Chapter 5 of the textbook. More details can be found in the heading of each script or notebook. This folder also contains trained neural networks that can be loaded in to reproduce the results from the textbook. Organization is as follows:
