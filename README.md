@@ -9,9 +9,18 @@ Neural networks use TensorFlow 2. A tutorial is available at: https://github.com
 ## **Repository Contents**
 This repository currently contains four folders, each associated to a chapter of the text. They are organized as follows:
 
-- Chapter 2: [**Linear Evolution Models**](https://github.com/jbramburger/DataDrivenDynSyst/tree/main/Linear%20Evolution%20Models): This folder contains MATLAB scripts to reproduce the results from Chapter 2 of the textbook. More details can be found in the heading of each script. Organization is as follows:
+- **Chapter 2**: [**Linear Evolution Models**](https://github.com/jbramburger/DataDrivenDynSyst/tree/main/Linear%20Evolution%20Models): This folder contains MATLAB scripts to reproduce the results from Chapter 2 of the textbook. More details can be found in the heading of each script. Organization is as follows:
     - DMD_Schrondinger.m applies dynamic mode decomposition (DMD) to the Schrodinger PDE.
     - windowDMD.m applies the [windowed DMD method of Dylewsky et al.](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.99.063311) to a multiscale signal to extract the fast and slow timescale dynamics.
     - DelayDMD.m uses delay coordinates and the Hankel matrix to inflate the dimension of observed data to apply DMD.
     - EDMD.m implements [Extended Dynamic Mode Decomposition](https://link.springer.com/article/10.1007/s00332-015-9258-5) to approximate the action of the Koopman operator on the span of observable functions using only data gathered from the system.
     - Kernel_DMD.m uses the kernel trick to identify Koopman eigenfunctions from data, based on the work of [Williams et al](https://www.aimsciences.org/article/doi/10.3934/jcd.2015005)  
+
+- **Chapter 3**: [**Identifying Nonlinear Dynamics**]([https://github.com/jbramburger/DataDrivenDynSyst/tree/main/Linear%20Evolution%20Models](https://github.com/jbramburger/DataDrivenDynSyst/tree/main/Identifying%20Nonlinear%20Dynamics)): This folder contains MATLAB scripts to reproduce the results from Chapter 3 of the textbook. More details can be found in the heading of each script. Organization is as follows:
+    - SINDy.m implements the [sparse identification of nonlinear dynamics method](https://www.pnas.org/doi/10.1073/pnas.1517384113) for nonlinear system identication from data. Also includes implementation the weak formulation due to [McCala and Schaeffer](https://pubmed.ncbi.nlm.nih.gov/28950639/) which is more robust to noisy data.
+    - SINDy_map.m applies the SINDy method to the discovery of Poincare maps, as outlined by [Bramburger and Kutz](https://www.sciencedirect.com/science/article/pii/S0167278919305470). Particular attention is drawn to the effect of the sparisty parameter and the library.
+    - deJong_control.m and Sprott_control.m implements the [control of chaos method](https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.64.1196) on a map and a continuous ODE, respectively. 
+    - averaging.m coarse-grains a multiscale signal (using window DMD) and implements the SINDy method to learn the slow-timescale evolution.
+    - conserved_quantities.m implements the method [Kaiser et al.](http://eurika-kaiser.com/downloads/KaKuBr2018cdc.pdf) to learn conserved quantities from data 
+
+- **Chapter 4**: **COMING SOON**: This folder contains MATLAB scripts to reproduce the results from Chapter 4 of the textbook. More details can be found in the heading of each script. Organization is as follows:
