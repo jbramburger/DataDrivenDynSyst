@@ -16,7 +16,7 @@ This repository currently contains four folders, each associated to a chapter of
     - EDMD.m implements [Extended Dynamic Mode Decomposition](https://link.springer.com/article/10.1007/s00332-015-9258-5) to approximate the action of the Koopman operator on the span of observable functions using only data gathered from the system.
     - Kernel_DMD.m uses the kernel trick to identify Koopman eigenfunctions from data, based on the work of [Williams et al](https://www.aimsciences.org/article/doi/10.3934/jcd.2015005)  
 
-- **Chapter 3**: [**Identifying Nonlinear Dynamics**]([https://github.com/jbramburger/DataDrivenDynSyst/tree/main/Linear%20Evolution%20Models](https://github.com/jbramburger/DataDrivenDynSyst/tree/main/Identifying%20Nonlinear%20Dynamics)): This folder contains MATLAB scripts to reproduce the results from Chapter 3 of the textbook. More details can be found in the heading of each script. Organization is as follows:
+- **Chapter 3**: [**Identifying Nonlinear Dynamics**](https://github.com/jbramburger/DataDrivenDynSyst/tree/main/Linear%20Evolution%20Models](https://github.com/jbramburger/DataDrivenDynSyst/tree/main/Identifying%20Nonlinear%20Dynamics): This folder contains MATLAB scripts to reproduce the results from Chapter 3 of the textbook. More details can be found in the heading of each script. Organization is as follows:
     - SINDy.m implements the [sparse identification of nonlinear dynamics method](https://www.pnas.org/doi/10.1073/pnas.1517384113) for nonlinear system identication from data. Also includes implementation the weak formulation due to [McCala and Schaeffer](https://pubmed.ncbi.nlm.nih.gov/28950639/) which is more robust to noisy data.
     - SINDy_map.m applies the SINDy method to the discovery of Poincare maps, as outlined by [Bramburger and Kutz](https://www.sciencedirect.com/science/article/pii/S0167278919305470). Particular attention is drawn to the effect of the sparisty parameter and the library.
     - deJong_control.m and Sprott_control.m implements the [control of chaos method](https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.64.1196) on a map and a continuous ODE, respectively. 
@@ -24,3 +24,18 @@ This repository currently contains four folders, each associated to a chapter of
     - conserved_quantities.m implements the method [Kaiser et al.](http://eurika-kaiser.com/downloads/KaKuBr2018cdc.pdf) to learn conserved quantities from data 
 
 - **Chapter 4**: **COMING SOON**: This folder contains MATLAB scripts to reproduce the results from Chapter 4 of the textbook. More details can be found in the heading of each script. Organization is as follows:
+    - 
+
+- **Chapter 5**: [**Learning Dynamics with Neural Networks**](https://github.com/jbramburger/DataDrivenDynSyst/tree/main/Learning%20Dynamics%20with%20Neural%20Networks): This folder contains MATLAB scripts and Jupyter notebooks to reproduce the results from Chapter 5 of the textbook. More details can be found in the heading of each script or notebook. This folder also contains trained neural networks that can be loaded in to reproduce the results from the textbook. Organization is as follows:
+    - neural_network.m implements a basic neural network and gradient descent training process.
+    - Forecast.ipynb usings a neural network, implemented and trained using Tensorflow 2.0, to forecast the dynamics of the Henon mapping.
+    - Diffusion_PINN.ipynb simulations the solutions to the heat equation using a [physics informed neural network (PINN)](https://www.sciencedirect.com/science/article/pii/S0021999118307125)
+    - Bistable_PINN.ipynb uses a PINN to identify the speed of traveling waves in a bistable reaction-diffusion equation.
+    - Diffusion_Discovery.ipynb employs a PINN to learn the coefficients in a heat equation from data. 
+
+- **Chapter 6**: [**Autoencoder Neural Networks**]([https://github.com/jbramburger/DataDrivenDynSyst/tree/main/Learning%20Dynamics%20with%20Neural%20Networks](https://github.com/jbramburger/DataDrivenDynSyst/tree/main/Autoencoder%20Neural%20Networks)): This folder contains MATLAB scripts and Jupyter notebooks to reproduce the results from Chapter 6 of the textbook. More details can be found in the heading of each script or notebook. This folder also contains trained neural networks that can be loaded in to reproduce the results from the textbook. Organization is as follows:
+    - Tent2Logistic.ipynb and Tent2Sine.ipynb both use an autoencoder neural network structure to approximate the conjugacy between the tent map and the logistic and sine maps, respectively.
+    - GlobalLinearization.ipynb uses an autoencoder to learn Koopman eignefunctions from data, following [Lusch et al.](https://www.nature.com/articles/s41467-018-07210-0).
+    - ActionAngle.ipynb learns an invertible change of variable to put the Kepler problem in action-angle coordinates.
+    -
+    - Rossler conj.ipynb and Gissinger conj.ipynb combine dimensionality reduction and model discovery to identify conjugate maps of their Poincare map dynamics. This work is based on the work of [Champion et al.](https://www.pnas.org/doi/abs/10.1073/pnas.1906995116) and primarily follows [Bramburger et al.](https://www.sciencedirect.com/science/article/pii/S0167278921001652)
