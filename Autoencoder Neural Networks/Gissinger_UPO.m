@@ -6,8 +6,8 @@ function [x1UPO, x2UPO, x3UPO, period] = Gissinger_UPO(sequence)
 % instad of 1, for example.
 %
 % Inputs:   - Sequences of 0's, 1's, and 2's 
-%               - Acceptable sequences are listed in Table XX in Section
-%               6.5 of textbook
+%               - Acceptable sequences are listed presented in Example 6.5.2  
+%                   in Section 6.5 of textbook
 %               - Default sequence is 1
 %               - Invalid inputs are changed to the default
 % 
@@ -76,10 +76,10 @@ elseif  strcmp(sequence,'011') == 1
     x0(3,:) = [-1.2935671 1.2935671 1.4306426];
 elseif  strcmp(sequence,'0012') == 1
     % 0012 orbit periodic orbit
-    x0(1,:) = [-1.0217707 1.0217707 1.0364347];
-    x0(2,:) = [-1.0475534 1.0475534 1.0779362];
-    x0(3,:) = [-1.183928 1.183928  1.2805532];
-    x0(4,:) = [-1.3434799 1.3434799 1.4995136];
+    x0(1,:) = [-1.3434799 1.3434799 1.4995136];
+    x0(2,:) = [-1.0217707 1.0217707 1.0364347];
+    x0(3,:) = [-1.0475534 1.0475534 1.0779362];
+    x0(4,:) = [-1.183928 1.183928  1.2805532];
 elseif  strcmp(sequence,'0011') == 1
     % 0011 orbit periodic orbit
     x0(1,:) = [-1.0218817 1.0218817 1.036612];
@@ -148,6 +148,8 @@ for p = 1:perMap
         end 
     end
 
+    %x0(p+1,:) = [xinit(end); yinit(end); zinit(end)];
+    
 end
 
 % Start clock
@@ -182,11 +184,11 @@ x3UPO = xNew(2*N+1:3*N);
 period = T*xNew(end);
 
 % Plot the solution in 3D
-plot3([x1UPO; x1UPO],[x2UPO; x2UPO],[x3UPO; x3UPO],'Color',[36/255 122/255 254/255],'Linewidth',5)
+plot3([x1UPO x1UPO],[x2UPO x2UPO],[x3UPO x3UPO],'Color',[36/255 122/255 254/255],'Linewidth',5)
 set(gca,'fontsize',16)
-xlabel('$x(t)$','Interpreter','latex','FontSize',20,'FontWeight','Bold')
-ylabel('$y(t)$','Interpreter','latex','FontSize',20,'FontWeight','Bold')
-zlabel('$z(t)$','Interpreter','latex','FontSize',20,'FontWeight','Bold')
+xlabel('$\hat x(t)$','Interpreter','latex','FontSize',20,'FontWeight','Bold')
+ylabel('$\hat y(t)$','Interpreter','latex','FontSize',20,'FontWeight','Bold')
+zlabel('$\hat z(t)$','Interpreter','latex','FontSize',20,'FontWeight','Bold')
 grid on
 
 end % end of Gissinger_UPO function
