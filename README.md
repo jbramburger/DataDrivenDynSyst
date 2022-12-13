@@ -35,6 +35,6 @@ This repository currently contains four folders, each associated to a chapter of
 - **Chapter 6**: [**Autoencoder Neural Networks**](https://github.com/jbramburger/DataDrivenDynSyst/tree/main/Autoencoder%20Neural%20Networks). This folder contains MATLAB scripts and Jupyter notebooks to reproduce the results from Chapter 6 of the textbook. More details can be found in the heading of each script or notebook. This folder also contains trained neural networks that can be loaded in to reproduce the results from the textbook. Organization is as follows:
     - Tent2Logistic.ipynb and Tent2Sine.ipynb both use an autoencoder neural network structure to approximate the conjugacy between the tent map and the logistic and sine maps, respectively.
     - GlobalLinearization.ipynb uses an autoencoder to learn Koopman eignefunctions from data, following [Lusch et al.](https://www.nature.com/articles/s41467-018-07210-0).
-    - ActionAngle.ipynb learns an invertible change of variable to put the Kepler problem in action-angle coordinates.
-    -
+    - 
+    - ActionAngle.ipynb learns an invertible change of variable to put the Kepler problem in action-angle coordinates. Much of this code was provided to me by Bethany Lusch and Craig Gin for which I am very thankful. Credit and links to their own GitHub profiles are provided in the corresponding notebook.
     - Rossler conj.ipynb and Gissinger conj.ipynb combine dimensionality reduction and model discovery to identify conjugate maps of their Poincare map dynamics. This work is based on the work of [Champion et al.](https://www.pnas.org/doi/abs/10.1073/pnas.1906995116) and primarily follows [Bramburger et al.](https://www.sciencedirect.com/science/article/pii/S0167278921001652)
