@@ -29,7 +29,7 @@ This repository currently contains four folders, each associated to a chapter of
 
 - **Chapter 5**: [**Learning Dynamics with Neural Networks**](https://github.com/jbramburger/DataDrivenDynSyst/tree/main/Learning%20Dynamics%20with%20Neural%20Networks). This folder contains MATLAB scripts and Jupyter notebooks to reproduce the results from Chapter 5 of the textbook. More details can be found in the heading of each script or notebook. This folder also contains trained neural networks that can be loaded in to reproduce the results from the textbook. Organization is as follows:
     - neural_network.m implements a basic neural network and gradient descent training process.
-    - Forecast.ipynb usings a neural network, implemented and trained using Tensorflow 2.0, to forecast the dynamics of the Henon mapping.
+    - Forecast.ipynb uses a neural network, implemented and trained using Tensorflow 2.0, to forecast the dynamics of the Henon mapping.
     - Diffusion_PINN.ipynb simulations the solutions to the heat equation using a [physics informed neural network (PINN)](https://www.sciencedirect.com/science/article/pii/S0021999118307125). PINN code is repurposed with permission from git user [janblechschmidt](https://github.com/janblechschmidt/PDEsByNNs).
     - Bistable_PINN.ipynb uses a PINN to identify the speed of traveling waves in a bistable reaction-diffusion equation.
     - Diffusion_Discovery.ipynb employs a PINN to learn the coefficients in a heat equation from data. 
