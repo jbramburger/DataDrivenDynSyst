@@ -100,8 +100,7 @@ for j = 1:length(mu)
    xm(j) = fsolve(snEqn, 0.5);
 end
 
-%%
-
+% Bifurcation diagram with Taylor approximation on it
 figure(1)
 plot(mu + exp(1),xTaylor_s + 1,'k','LineWidth',2)
 hold on
@@ -114,7 +113,8 @@ ylabel('$x^*(\mu)$','Interpreter','Latex')
 set(gca,'FontSize',16,'Xlim',[exp(1) - 0.02 3.01])
 box on
 
-%% 
+% (Numerically) exact bifurcation diagram
+figure(2)
 plot(fixed_s(:,2) + exp(1),fixed_s(:,1) + 1,'Color',[1 69/255 79/255],'LineWidth',5)
 hold on
 plot(mu + exp(1),xp,'k--','LineWidth',2)
@@ -124,6 +124,77 @@ plot(exp(1),1,'.','Color',[36/255 122/255 254/255],'MarkerSize',40)
 xlabel('$\mu$','Interpreter','Latex')
 ylabel('$x^*(\mu)$','Interpreter','Latex')
 set(gca,'FontSize',16,'Xlim',[exp(1) - 0.02 3.01])
+box on
+
+%% Period-doubling normal form bifurcation diagram
+
+close all
+clear all
+clc
+
+% Initialization for bifurcation diagram
+N = 50000; % number of iterations
+mu = 0.22:0.0001:0.35;
+x = zeros(N,3);
+bifDiag = zeros(length(mu),10);
+
+% Generate data for bifurcation diagram
+for j = 1:length(mu)
+    x(1,:) = [1; 1; -mu(j)] + 0.1;
+    for n = 1:N-1
+        
+        x(n+1,1) = x(n,2);
+        x(n+1,2) = 1 + mu(j)*x(n,1) + x(n,2)*x(n,3);
+        x(n+1,3) = x(n,3) - mu(j)*x(n,1)*x(n,2) - x(n,3)*x(n,2)^2;
+        
+    end
+    
+    bifDiag1(j,:) = x(end-9:end,1) - 1;
+    bifDiag3(j,:) = x(end-9:end,3) + mu(j);
+end
+
+% Plot attractors in a bifurcation diagram
+figure(1)
+plot(mu - 0.25,bifDiag1,'k.','MarkerSize',10)
+xlabel('$\mu - 0.25$','Interpreter','Latex')
+ylabel('$x_3 - \mu$','Interpreter','Latex')
+set(gca,'FontSize',16,'Xlim',[mu(1)-0.25, mu(end)-0.25],'Ylim',[min(bifDiag1(end,:)), max(bifDiag1(end,:))])
+box on
+
+%%
+
+% Load normal form data
+load period_doubling.mat
+% --> Outputs are (flip_x1,flip_x2,fixed_pt_x)
+%        2-cycle branches of bifurcating solutions are given in flip_x1 and
+%        flip_x2, while the trivial/fixed point branch is given in
+%        fixed_pt_x. All outputs are 4-dimensional: 3 state variables and
+%        one parameter.
+
+% Plot bifurcation diagram from normal form
+figure(2)
+plot(fixed_pt_x(1:10000,4)/10,fixed_pt_x(1:10000,1),'k','LineWidth',3)
+hold on
+plot(fixed_pt_x(10001:20000,4)/10,fixed_pt_x(10001:20000,1),'k--','LineWidth',3)
+plot(flip_x1(:,4)/10,flip_x1(:,1),'k','LineWidth',3)
+plot(flip_x2(:,4)/10,flip_x2(:,1),'k','LineWidth',3)
+plot(mu - 0.25,bifDiag1,'b.','MarkerSize',10)
+xlabel('$\mu$','Interpreter','Latex')
+ylabel('$x_1$','Interpreter','Latex')
+%set(gca,'FontSize',16,'Xlim',[0.23, 0.27])
+box on
+
+% x3 bifurcation diagram 
+figure(3)
+plot(fixed_pt_x(1:10000,4)/10 + 0.25,fixed_pt_x(1:10000,3) - fixed_pt_x(1:10000,4)/10 - 0.25,'k','LineWidth',3)
+hold on
+plot(fixed_pt_x(10001:20000,4)/10 + 0.25,fixed_pt_x(10001:20000,3) - fixed_pt_x(10001:20000,4)/10 - 0.25,'k--','LineWidth',2)
+plot(flip_x1(:,4)/10 + 0.25,flip_x1(:,3) - flip_x1(:,4)/10 - 0.25,'k','LineWidth',3)
+plot(flip_x2(:,4)/10 + 0.25,flip_x2(:,3) - flip_x2(:,4)/10 - 0.25,'k','LineWidth',3)
+%plot(mu - 0.25,bifDiag3,'b.','MarkerSize',10)
+xlabel('$\mu$','Interpreter','Latex')
+ylabel('$x_3$','Interpreter','Latex')
+set(gca,'FontSize',16,'Xlim',[0.23, 0.27])
 box on
 
 %% Koopman eigenfunctions for global linearization 
