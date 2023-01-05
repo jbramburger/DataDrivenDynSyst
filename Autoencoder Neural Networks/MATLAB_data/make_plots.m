@@ -128,6 +128,7 @@ box on
 
 %% Period-doubling normal form bifurcation diagram
 
+% Clean workspace
 close all
 clear all
 clc
@@ -160,8 +161,6 @@ xlabel('$\mu - 0.25$','Interpreter','Latex')
 ylabel('$x_3 - \mu$','Interpreter','Latex')
 set(gca,'FontSize',16,'Xlim',[mu(1)-0.25, mu(end)-0.25],'Ylim',[min(bifDiag1(end,:)), max(bifDiag1(end,:))])
 box on
-
-%%
 
 % Load normal form data
 load period_doubling.mat
