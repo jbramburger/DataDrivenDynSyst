@@ -93,7 +93,7 @@ for n = 1:200
 end
 
 % Compare Y_M to Z_{M+1} - should both be the same if A is perfect
-%norm(Y(:,end) - Z(:,end))
+norm(Z(:,end))
 
 %% Enforce DMD matrix is a unitary matrix
 % --> Obtained through solution to Procrustes problem

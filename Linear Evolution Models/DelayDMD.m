@@ -26,7 +26,7 @@ clear all; close all; clc
 % Generate data
 dt = 0.1;
 t = 0:dt:40;
-numOsc = 2; 
+numOsc = 8; 
 x = zeros(1,length(t));
 
 % Randomize frequencies and choice of sine or cosine
@@ -66,9 +66,9 @@ for j = delays+1:length(x)
 end
 
 % Plot results
-plot(t,x,'b--','LineWidth',2)
+plot(t,x,'--','Color',[36/255 122/255 254/255],'LineWidth',2)
 hold on
-plot(t,xpred,'r','LineWidth',1)
+plot(t,xpred,'Color',[1 69/255 79/255],'LineWidth',1)
 xlabel('t')
 set(gca,'Fontsize',16,'Xlim',[0, 20])
 legend('True Signal','Reconstructed Signal')
@@ -87,16 +87,16 @@ x0 = [2; 2];
 
 % Plot solution
 subplot(2,1,1) % x(t)
-plot(t,x(:,1),'b','Linewidth',2)
-xlabel('t')
-ylabel('x(t)')
+plot(t,x(:,1),'Color',[36/255 122/255 254/255],'Linewidth',2)
+xlabel('$t$','Interpreter','Latex')
+ylabel('$x(t)$','Interpreter','Latex')
 set(gca,'Fontsize',16)
 axis tight
 
-subplot(2,1,2) % y(t)
-plot(t,x(:,2),'r','Linewidth',2)
-xlabel('t')
-ylabel('y(t)')
+subplot(2,1,2) % x'(t) = dx/dt
+plot(t,x(:,2),'Color',[1 69/255 79/255],'Linewidth',2)
+xlabel('$t$','Interpreter','Latex')
+ylabel('$\dot{x}(t)$','Interpreter','Latex')
 set(gca,'Fontsize',16)
 axis tight
 
@@ -105,7 +105,7 @@ axis tight
 close all
 
 % Hankel matrix
-delays = 1000;
+delays = 100;
 xd = hankel(x(1:delays+1,1),x(delays+1:end,1))';
 
 % x_n+1 = a_1*x_{n - d + 1} + a_2*x_{n - d + 2} ... a_d*x_{n}  
@@ -146,13 +146,13 @@ xd = hankel(x(1:delays,1),x(delays:end,1));
 
 % Plot SVD Results
 figure('Position', [100, 500, 700, 500])
-subplot(2,1,1) % Singular values
-plot(diag(S)/max(diag(S)),'ko','Linewidth',2)
-ylabel('$\sigma_j/\sigma_1$','interpreter','latex')
+subplot(3,1,1) % Singular values
+plot(diag(S.^2)/sum(diag(S.^2)),'ko','Linewidth',2)
+ylabel('$\sigma_k^2/\sum \sigma_j^2$','interpreter','latex')
 title(['$\tau =$ ', num2str(delays)],'interpreter','latex')
 set(gca,'Fontsize',16,'Xlim',[0.9 min(delays+0.1,100+0.1)])
 
-subplot(2,1,2) % Right-singular vectors
+subplot(3,1,2) % Right-singular vectors
 plot(t(1:end-delays+1),V(:,1),'Color',[1 69/255 79/255],'Linewidth',2)
 hold on
 plot(t(1:end-delays+1),V(:,2),'--','Color',[36/255 122/255 254/255],'Linewidth',2)
@@ -160,13 +160,13 @@ xlabel('$t$','interpreter','latex')
 set(gca,'Fontsize',16,'Xlim',[0 t(end-delays)])
 legend('$v_1(t)$','$v_2(t)$','interpreter','latex')
 % 
-% subplot(3,1,3) % Right-singular vectors
-% plot(t(1:end-delays+1),V(:,3),'Color',[1 69/255 79/255],'Linewidth',2)
-% hold on
-% plot(t(1:end-delays+1),V(:,4),'--','Color',[36/255 122/255 254/255],'Linewidth',2)
-% xlabel('$t$','interpreter','latex')
-% set(gca,'Fontsize',16,'Xlim',[0 t(end-delays)])
-% legend('$v_3(t)$','$v_4(t)$','interpreter','latex')
+subplot(3,1,3) % Right-singular vectors
+plot(t(1:end-delays+1),V(:,3),'Color',[1 69/255 79/255],'Linewidth',2)
+hold on
+plot(t(1:end-delays+1),V(:,4),'--','Color',[36/255 122/255 254/255],'Linewidth',2)
+xlabel('$t$','interpreter','latex')
+set(gca,'Fontsize',16,'Xlim',[0 t(end-delays)])
+legend('$v_3(t)$','$v_4(t)$','interpreter','latex')
 
 %% Time-Delay DMD on Low Rank Approximation of Hankel Matrix --------------
 
@@ -174,22 +174,22 @@ close all
 
 % Find rank with 95% of energy
 energy = 0;
-energyTotal = sum(diag(S));
+energyTotal = sum(diag(S).^2);
 r = 0;
-while energy <= 0.95
+while energy <= 0.94
     r = r + 1;
-    energy = energy + S(r,r)/energyTotal;
+    energy = energy + S(r,r)^2/energyTotal;
 end
 
 % Apply DMD to first r columns of V
 X1 = V(1:end-1,1:r)';
 X2 = V(2:end,1:r)'; 
 [U2, S2, V2] = svd(X1,'econ');
-A = U2'*X2*V2*diag(1./diag(S2));
+A = X2*V2*diag(1./diag(S2));
 
 % Plot eigenvalues of A
 mu = eig(A);
-plot(mu,'.','MarkerSize',10)
+plot(mu,'.','MarkerSize',20)
 xlabel('Real Part','interpreter','latex')
 ylabel('Imaginary Part','interpreter','latex')
 title('Eigenvalues of the DMD Matrix','interpreter','latex')

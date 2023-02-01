@@ -194,8 +194,8 @@ figure(6)
 clf
 plot(t,xdat,'k.','LineWidth',1)
 hold on
-plot(t,real(windowSolslow),'Color',[0 168/255 0],'LineWidth',2)
-plot(t,real(windowSolfast),'Color',[36/255 122/255 254/255],'LineWidth',1)
+plot(t,real(windowSolslow),'Color',[36/255 122/255 254/255],'LineWidth',2)
+plot(t,real(windowSolfast),'Color',[0 168/255 0],'LineWidth',1)
 xlabel('$t$','interpreter','latex','FontSize',16)
 ylabel('$x(t)$','interpreter','latex','FontSize',16)
 set(gca,'FontSize',14,'Xlim',[0,tspan(end)])
