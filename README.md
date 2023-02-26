@@ -4,9 +4,13 @@ MORE INFO COMING SOON - please contact me for details if you are interested.
 
 This repository contains the scripts and notebooks that accompany the book Data-Driven Methods for Dynamic Systems
 
-## **Versions**
+## **Packages and Versions**
 
 MATLAB scripts were originally written and run on version R2019_a. Jupyter notebooks use Python 3.8.0 and neural networks are built and trained using TensorFlow 2.0. The reader is referred to the [TensorFlow tutorial](https://github.com/instillai/TensorFlow-Course) to familiarize themself. 
+
+Scripts related to work in Chapter 4 (Data-Driven Polynomial Optimization) require YALMIP and MOSEK to run. Both packages can be download for free at 
+- YALMIP: https://yalmip.github.io/download/
+- MOSEK: https://www.mosek.com/downloads/
 
 ## **Repository Contents**
 This repository currently contains four folders, each associated to a chapter of the text. They are organized as follows:
