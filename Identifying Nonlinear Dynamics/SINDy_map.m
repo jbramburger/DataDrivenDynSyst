@@ -91,7 +91,7 @@ Xi = xnp1*pinv(Theta);
 %% Apply SINDy algorithm to obtain sparse model
 
 % Sparsity parameter
-lam = 0.01;
+lam = 0.001;
 
 k = 1;
 Xi_new = Xi;
@@ -206,7 +206,7 @@ xnp1 = PsecNext;
 
 Theta = ones([1,length(xn(1,:))]); % constant term
 
-polyorder = 5; % change maximal polynomial order of monomials in library (print options below will not work if polyorder is not 5)
+polyorder = 2; % change maximal polynomial order of monomials in library (print options below will not work if polyorder is not 5)
 
 for p = 1:polyorder
     Theta(p+1,:) = xn.^p;

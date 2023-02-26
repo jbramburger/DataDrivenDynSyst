@@ -34,7 +34,7 @@ c = 18;
 
 % Integration parameters
 dt = 0.0001;
-t = 0:dt:20;
+t = 0:dt:100;
 options = odeset('RelTol',1e-12,'AbsTol',1e-12*ones(1,3));
 
 % Simulate Lorenz system
@@ -46,7 +46,7 @@ x0 = [1;  2; rho - 1];
 % [t,xsol] = ode45(@(t,x) Rossler(x,a,b,c),t,x0,options);
 
 % Add noise
-var = 0.001; % noise variance
+var = 0.0; % noise variance
 xsol = xsol + sqrt(var)*randn(size(xsol));
 xsol = xsol'; % change dimensions to match theory
 
@@ -56,15 +56,16 @@ xsol = xsol'; % change dimensions to match theory
 
 %% Plot chaotic attractor
 
-colormap(hot)
+%colormap(hot)
 patch(xsol(1,:),xsol(2,:),xsol(3,:),t,'FaceColor','none','EdgeColor','interp','LineWidth',1) % rainbow coloured trajectory!
-xlabel('$x$','Interpreter','Latex')
-ylabel('$y$','Interpreter','Latex')
-zlabel('$z$','Interpreter','Latex')
+xlabel('$x_1$','Interpreter','Latex')
+ylabel('$x_2$','Interpreter','Latex')
+zlabel('$x_3$','Interpreter','Latex')
 set(gca,'Fontsize',16)
 axis tight
 view(45,45)
 grid on
+%colorbar
 
 %% Estimate derivatives
 

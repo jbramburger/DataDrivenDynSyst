@@ -44,8 +44,8 @@ x0 = [4*rand; 0];
 
 %% Plot results
 plot(xdat(:,2),xdat(:,1),'b','LineWidth',1)
-xlabel('t')
-ylabel('x(t)')
+xlabel('$t$','Interpreter','Latex')
+ylabel('$x(t)$','Interpreter','Latex')
 set(gca,'Fontsize',16)
 
 %% Collect coarse-grained data

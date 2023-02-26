@@ -164,7 +164,8 @@ mu = diag(D); % extract eigenvalues
 omega = log(mu)*L^2/dt/nu/pi^2;
 
 % Check which are close to integers
-sort(sqrt(-omega))
+omegaSort = sort(sqrt(abs(omega)))
+
 
 %% Burgers right-hand-side
 function rhs = burgers(t,u,nu,D,D2)
