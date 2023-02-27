@@ -33,7 +33,9 @@ This repository currently contains four folders, each associated to a chapter of
     - conserved_quantities.m implements the method [Kaiser et al.](http://eurika-kaiser.com/downloads/KaKuBr2018cdc.pdf) to learn conserved quantities from data 
 
 - **Chapter 4**: [**Polynomial Optimization**](https://github.com/jbramburger/DataDrivenDynSyst/tree/main/Polynomial%20Optimization). This folder contains MATLAB scripts to reproduce the results from Chapter 4 of the textbook. More details can be found in the heading of each script. [YALMIP](https://yalmip.github.io/download/) and [MOSEK](https://www.mosek.com/downloads/) are required to run most scripts in this folder. Organization is as follows:
-    - TBD
+    - MG_LyapFn.m uses polynomial optimization and sum-of-squares relaxations to identify a Lyapunov function for the Moore-Greitzer system.
+    - heteroclinic_UpperBnd.m and heteroclinic_LowerBnd.m identifies an auxialary function to construct barriers in phase space that prove existence and non-existence, respectively, of a heteroclinic orbit in a planar dynamical system.
+    -
 
 - **Chapter 5**: [**Learning Dynamics with Neural Networks**](https://github.com/jbramburger/DataDrivenDynSyst/tree/main/Learning%20Dynamics%20with%20Neural%20Networks). This folder contains MATLAB scripts and Jupyter notebooks to reproduce the results from Chapter 5 of the textbook. More details can be found in the heading of each script or notebook. This folder also contains trained neural networks that can be loaded in to reproduce the results from the textbook. Organization is as follows:
     - neural_network.m implements a basic neural network and gradient descent training process.
