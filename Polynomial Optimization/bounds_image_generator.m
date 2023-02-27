@@ -1,9 +1,9 @@
 % -------------------------------------------------------------------------
-% Plotting upper and lower bounds on homoclinic existence
+% Plotting upper and lower bounds on heteroclinic existence
 %
 % This script plots the upper and lower bounds over a range of the
-% hyperparameter lambda for the existence of homoclinic orbit. Data is
-% loaded in from the .mat files homoclinic_lambda_ + 'upper' or 'lower' for
+% hyperparameter lambda for the existence of heteroclinic orbit. Data is
+% loaded in from the .mat files heteroclinic_lambda_ + 'upper' or 'lower' for
 % upper or lower bounds + 'm2' or 'm3' for m = 2 or 3, respectively. Each
 % file containts the lambda values, the value of m for reference, and
 % arrays c2, c3, c4, c5 representing the values of upper or lower bounds 
@@ -23,12 +23,12 @@ clc
 %% Load in upper bound data
 
 % m = 2 data
-load homoclinic_lambda_upper_m2.mat
-load homoclinic_lambda_upper_m2_part2.mat
+load heteroclinic_lambda_upper_m2.mat
+load heteroclinic_lambda_upper_m2_part2.mat
 
 % m = 3 data
-load homoclinic_lambda_upper_m3.mat
-load homoclinic_lambda_upper_m3_part2.mat
+% load heteroclinic_lambda_upper_m3.mat
+% load heteroclinic_lambda_upper_m3_part2.mat
 
 %% Unpack data and aggregate
 
@@ -60,9 +60,9 @@ plot(lambda(1:3:end),c5(1:3:end),':','Color',[255/255 66/255 161/255],'LineWidth
 
 %% Load lower bound data
 if m == 2
-    load homoclinic_lambda_lower_m2.mat
+    load heteroclinic_lambda_lower_m2.mat
 elseif m == 3
-    load homoclinic_lambda_lower_m3.mat
+    load heteroclinic_lambda_lower_m3.mat
 end
 
 %% Plot lower bounds
