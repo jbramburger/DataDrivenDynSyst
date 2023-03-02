@@ -35,7 +35,7 @@ This repository currently contains four folders, each associated to a chapter of
 - **Chapter 4**: [**Data-Driven Polynomial Optimization**](https://github.com/jbramburger/DataDrivenDynSyst/tree/main/Data-Driven%20Polynomial%20Optimization). This folder contains MATLAB scripts to reproduce the results from Chapter 4 of the textbook. More details can be found in the heading of each script. [YALMIP](https://yalmip.github.io/download/) and [MOSEK](https://www.mosek.com/downloads/) are required to run most scripts in this folder. Organization is as follows:
     - MG_LyapFn.m uses polynomial optimization and sum-of-squares relaxations to identify a Lyapunov function for the Moore-Greitzer system.
     - heteroclinic_UpperBnd.m and heteroclinic_LowerBnd.m identifies an auxialary function to construct barriers in phase space that prove existence and non-existence, respectively, of a heteroclinic orbit in a planar dynamical system.
-    -
+    - Disc_LyapFn_Data.m applies an EDMD-type process to approximate the Koopman operator in order to learn Lyapunov functions from data.
 
 - **Chapter 5**: [**Learning Dynamics with Neural Networks**](https://github.com/jbramburger/DataDrivenDynSyst/tree/main/Learning%20Dynamics%20with%20Neural%20Networks). This folder contains MATLAB scripts and Jupyter notebooks to reproduce the results from Chapter 5 of the textbook. More details can be found in the heading of each script or notebook. This folder also contains trained neural networks that can be loaded in to reproduce the results from the textbook. Organization is as follows:
     - neural_network.m implements a basic neural network and gradient descent training process.
