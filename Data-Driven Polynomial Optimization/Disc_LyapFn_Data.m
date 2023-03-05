@@ -26,9 +26,11 @@ format long
 % maxDp = max degree of Dp dictionary of obserables
 % maxDq = max degree of Dq dictionary of obserables
 % epsilon = hyperparameter specific to Lyapunov function for sharp bounds
+% cleanVal = remove coefficients smaller than this value from Lyap function
 maxDp = 4;
-maxDq = 6;
+maxDq = maxDp + 2;
 epsilon = 1;
+cleanVal = 1e-4;
 
 %% Generate synthetic data
 
@@ -94,7 +96,7 @@ OBJ = sum(abs(c));
 solvesos(cons,OBJ,opts,c)
 
 % Print coefficients after removing those smaller than 10^-4 
-c = clean(value(c), 1e-4)
+c = clean(value(c), cleanVal)
 
 %% Check identified Lyapunov function is a real Lyapunov function
 % ---> This time we maximize epsilon and check if it is positive
