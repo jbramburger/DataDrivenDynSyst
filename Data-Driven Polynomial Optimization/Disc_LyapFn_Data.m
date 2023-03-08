@@ -1,6 +1,6 @@
 % -------------------------------------------------------------------------
 % Identifying Lyapunov Functions from Data with EDMD
-
+%
 % The goal of this script is to use EDMD and semidefinite programming to 
 % identify a Lyapunov function for the planar discrete-time system
 %      x1 --> 0.3*x1 , 
@@ -12,6 +12,9 @@
 %           https://yalmip.github.io/download/
 % and MOSEK can be downloaded at:
 %           https://www.mosek.com/downloads/
+%
+% This script accompanies Section 4.3 of Data-Driven Methods for
+% Dynamic Systems.
 %
 % Written by J. Bramburger and G. Fantuzzi.
 %
