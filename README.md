@@ -12,6 +12,8 @@ Scripts related to work in Chapter 4 (Data-Driven Polynomial Optimization) requi
 - YALMIP: https://yalmip.github.io/download/
 - MOSEK: https://www.mosek.com/downloads/
 
+To improve numerical performance, some work related to scripts in Chapter 4 use a Chebyshev function basis instead of monomials. This requires the Chebfun package for MATLAB, which can be freely downloaded at: https://www.chebfun.org/download/
+
 ## **Repository Contents**
 This repository currently contains four folders, each associated to a chapter of the text. They are organized as follows:
 
