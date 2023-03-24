@@ -40,6 +40,7 @@ This repository currently contains four folders, each associated to a chapter of
     - Disc_LyapFn_Data.m applies an EDMD-type process to approximate the Koopman operator in order to learn Lyapunov functions from data.
     - logistic_bounds.m applies an EDMD-type process to bound expectations long-time averages in a stochastic logistic map.
     - pend_control.m discovers a controller from data to stabilize the inverted pendulum on a cart in the upright position. 
+    - invariant_measure.m identifies extremal invariant measures from data. The method combines the data-driven approximation of the Lie derivative with the method of convex computation of invariant measures due to [Korda et al.](https://arxiv.org/abs/1807.08956)
 
 - **Chapter 5**: [**Learning Dynamics with Neural Networks**](https://github.com/jbramburger/DataDrivenDynSyst/tree/main/Learning%20Dynamics%20with%20Neural%20Networks). This folder contains MATLAB scripts and Jupyter notebooks to reproduce the results from Chapter 5 of the textbook. More details can be found in the heading of each script or notebook. This folder also contains trained neural networks that can be loaded in to reproduce the results from the textbook. Organization is as follows:
     - neural_network.m implements a basic neural network and gradient descent training process.
