@@ -20,7 +20,7 @@ To improve numerical performance, some work related to scripts in Chapter 4 use 
 This repository currently contains four folders, each associated to a chapter of the text. They are organized as follows:
 
 - **Chapter 1**: [**Dynamical Systems: Old and New**](https://github.com/jbramburger/DataDrivenDynSyst/tree/main/Dynamical%20Systems%20Old%20and%20New). This folder contains MATLAB scripts to reproduce the results from Chapter 1 of the textbook. More details can be found in the heading of each script. Organization is as follows:
-    - spiral_POD.m applies proper orthogonal decomposition (POD) to a spiral wave solution of a PDE.
+    - `spiral_POD.m` applies proper orthogonal decomposition (POD) to a spiral wave solution of a PDE.
 
 - **Chapter 2**: [**Linear Evolution Models**](https://github.com/jbramburger/DataDrivenDynSyst/tree/main/Linear%20Evolution%20Models). This folder contains MATLAB scripts to reproduce the results from Chapter 2 of the textbook. More details can be found in the heading of each script. Organization is as follows:
     - `DMD_Schrondinger.m` applies dynamic mode decomposition (DMD) to the Schrodinger PDE.
