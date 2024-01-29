@@ -27,7 +27,9 @@ This repository currently contains four folders, each associated to a chapter of
     - `windowDMD.m` applies the [windowed DMD method of Dylewsky et al.](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.99.063311) to a multiscale signal to extract the fast and slow timescale dynamics. The MATLAB data `ortho_mat.mat` contains the exact orthogonal matrix used to mix the signal so that one can fully reproduce the figures and results from the textbook.
     - `DelayDMD.m` uses delay coordinates and the Hankel matrix to inflate the dimension of observed data to apply DMD.
     - `EDMD.m` implements [Extended Dynamic Mode Decomposition](https://link.springer.com/article/10.1007/s00332-015-9258-5) to approximate the action of the Koopman operator on the span of observable functions using only data gathered from the system.
-    - `Kernel_DMD.m` uses the kernel trick to identify Koopman eigenfunctions from data, based on the work of [Williams et al](https://www.aimsciences.org/article/doi/10.3934/jcd.2015005).  
+    - `Kernel_DMD.m` uses the kernel trick to identify Koopman eigenfunctions from data, based on the work of [Williams et al](https://www.aimsciences.org/article/doi/10.3934/jcd.2015005).
+
+    This folder also contains Julia scripts for the examples in the folder [Julia Scripts](https://github.com/jbramburger/DataDrivenDynSyst/tree/main/Linear%20Evolution%20Models/Julia%20Scripts) written by [Daniel Fassler](https://github.com/Falsorr). 
 
 - **Chapter 3**: [**Identifying Nonlinear Dynamics**](https://github.com/jbramburger/DataDrivenDynSyst/tree/main/Identifying%20Nonlinear%20Dynamics). This folder contains MATLAB scripts to reproduce the results from Chapter 3 of the textbook. More details can be found in the heading of each script. Organization is as follows:
     - `SINDy.m` implements the [sparse identification of nonlinear dynamics method (SINDy)](https://www.pnas.org/doi/10.1073/pnas.1517384113) for nonlinear system identication from data. Also includes implementation the weak formulation due to [McCala and Schaeffer](https://pubmed.ncbi.nlm.nih.gov/28950639/) which is more robust to noisy data.
