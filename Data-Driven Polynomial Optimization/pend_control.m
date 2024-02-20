@@ -59,7 +59,7 @@ t = 0:dt:20;
 syst = @(t,x,a,b) [x(2); -0.1*x(2) + sin(x(1)) - cos(x(1))*a*sin(t + b)];
 
 % Initialize for multiple initial conditions
-numICs = 200;
+numICs = 20;
 xdat = [];
 ydat = [];
 uxdat = [];
@@ -94,9 +94,9 @@ ydat = ydat';
 
 % Qu matrix
 pow = monpowers(3,maxDq);
-ell = size(pow,1); % number of nontrivial monomials in Q
+m = size(pow,1); % number of nontrivial monomials in Q
 Q = [];
-for i = 1:ell
+for i = 1:m
    
     zx = xdat.^pow(i,:); 
     
@@ -112,9 +112,9 @@ Q = [Q; Q.*uxdat'];
 
 % P matrix
 pow = monpowers(3,maxDp);
-m = size(pow,1); % number of nontrivial monomials in P
+ell = size(pow,1); % number of nontrivial monomials in P
 P = [];
-for i = 1:m
+for i = 1:ell
     
     zy = ydat.^pow(i,:);
    
@@ -145,11 +145,15 @@ c(2) = -1;
 c(10) = 0.5;
 c(11) = -al;
 
+% Lyapunov function
+% Lyap = 0.5*( 0.5*x(3)^2 + x(1) - 1 )^2 + al*(1 - x(1)^3);
+% c = coefficients(Lyap,x);
+
 % Lie derivative approximation
 L = (K - eye( size(K) ) ) /dt;
 thresh = 0.05; % use to stamp out noise
 L(abs(L) <= thresh) = 0;
-Lie = c.'*(L(:,1:ell)*w + L(:,ell+1:end)*w*u);
+Lie = c.'*(L(:,1:m)*w + L(:,m+1:end)*w*u);
 
 %% Polynomial optimization to find controller 
 
@@ -182,7 +186,7 @@ fprintf('\n')
 %% Check that we have indeed discovered a control law
 
 % Randomized initial conditions
-%x0 = [2*pi*rand - pi; 2*rand - 1];
+x0 = [2*pi*rand - pi; 2*rand - 1];
 
 % Initial condition close to hanging down position
 x0 = [pi - 0.001; 0];
@@ -205,6 +209,7 @@ xlabel('$t$','interpreter','latex')
 title('Controlled Solutions')
 legend('$\theta(t)$','$\dot\theta(t)$','Location','Best','interpreter','latex','FontSize',20)
 set(gca,'FontSize',16,'Xlim',[0,t(end)])
+axis tight
 
 % Determine controller as time goes on
 uc = [];
@@ -213,13 +218,16 @@ for j = 1:length(t)
 end
 
 figure(2)
-plot(t,(0.5*xc(:,2).^2 + 1 - cos(xc(:,1)) + al*(1 - cos(xc(:,1)).^3)),'Color',[36/255 122/255 254/255],'LineWidth',3)
+V0 = 10; % (0.5*xc(1,2).^2 + 1 - cos(xc(1,1)) + al*(1 - cos(xc(1,1)).^3));
+uc0 = 1; % uc(1);
+plot(t,(0.5*xc(:,2).^2 + 1 - cos(xc(:,1)) + al*(1 - cos(xc(:,1)).^3))/V0,'Color',[36/255 122/255 254/255],'LineWidth',3)
 hold on
-plot(t,uc,'--','Color',[1 69/255 79/255],'LineWidth',3)
+plot(t,uc/uc0,'--','Color',[1 69/255 79/255],'LineWidth',3)
 xlabel('$t$','interpreter','latex')
 title('Controller and Lyapunov Function')
 legend('$V(\theta(t),\dot\theta(t))$','$u(t)$','Location','Best','interpreter','latex','FontSize',20)
 set(gca,'FontSize',16,'Xlim',[0,t(end)])
+axis tight
 
 
 
