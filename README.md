@@ -59,3 +59,5 @@ This repository currently contains four folders, each associated to a chapter of
     - `GlobalLinearization.ipynb` uses an autoencoder to learn Koopman eignefunctions from data, following [Lusch et al.](https://www.nature.com/articles/s41467-018-07210-0)
     - `ActionAngle.ipynb` learns an invertible change of variable to put the Kepler problem in action-angle coordinates. Much of this code was provided to me by Bethany Lusch and Craig Gin for which I am very thankful. Credit and links to their own GitHub profiles are provided in the corresponding notebook.
     - `Rossler_conj.ipynb` and `Gissinger_conj.ipynb` combine dimensionality reduction and model discovery to identify conjugate maps of their Poincare map dynamics. This work is based on the work of [Champion et al.](https://www.pnas.org/doi/abs/10.1073/pnas.1906995116) and primarily follows [Bramburger et al.](https://www.sciencedirect.com/science/article/pii/S0167278921001652)
+ 
+All neural networks are trained and saved using TensorFlow version 2.7
