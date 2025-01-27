@@ -1,5 +1,21 @@
-#Here we will model the system of differential equations:
+# -------------------------------------------------------------------------
+# Discovering Conserved Quantities
+# -------------------------------------------------------------------------
+#
+# The goal of this script is to discover conserved quantities from data
+# gather from a dynamical system. We illustrate with a simple 3D dynamical
+# system that has two conserved quantities: one whose level sets are
+# spheres and the other whose are ellipsoids. The method using the SVD to
+# identify orthogonal basis vectors that span the nullspace of Gamma, as
+# defined in the text.
+#
+# This script accompanies Section 3.5 of Data-Driven Methods for
+# Dynamic Systems.
 
+# This script was adapted from the MATLAB version by Jason J. Bramburger
+# 
+# Author: Mohit Sahu
+# -------------------------------------------------------------------------
 
 using DifferentialEquations, LinearAlgebra, Plots
 
