@@ -38,11 +38,11 @@ function sindy(dxdt, Θ, total_dim, lam=0.01)
     return Xi_new
 end
 
-function print_model(Xi_new, mons,total_dim)
+function print_model(Xi_new, mons,total_dim, print_f=["dx/dt", "dy/dt", "dz/dt"], lam=1e-3)
     println("Discovered Model using SINDy: ")
     for ind = 1:total_dim
-        println("d" * mons[ind+1] *"/dt = ")
-        bigcoeffs = abs.(Xi_new[ind,:]) .> 1e-3; # chosen small just to weed out zero coefficients
+        println(print_f[ind] * " = ")
+        bigcoeffs = abs.(Xi_new[ind,:]) .> lam; # chosen small just to weed out zero coefficients
         for jnd = eachindex(bigcoeffs)
             if bigcoeffs[jnd] == 1
                 # Print the model by excluding zeroed out terms
