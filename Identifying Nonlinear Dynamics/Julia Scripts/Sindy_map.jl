@@ -39,14 +39,13 @@ end
 
 function generate_traj(integrator, x_init, tspan, dt)
    # returns back trajectories for different x0
-   xdat = zeros((length(x_init), 2, Int((tspan[2]-tspan[1])/dt + 1)))
+   xdat = zeros((length(x_init), Int((tspan[2]-tspan[1])/dt + 1),2))
    for j in 1:length(x_init)
        reinit!(integrator, x_init[j])
        n = 1;
        for i in tspan[1]:dt:tspan[2]
+           xdat[j, n,:] = integrator.u;
            step!(integrator, dt, true);
-           xdat[j, :, n] = integrator.u;
-
            n+=1;
        end
    end
@@ -70,54 +69,46 @@ if numTraj >= 2
    end
 end
 
-# tspan = (0.0,100.0*dt);
-# this is generating wrong trajectories
 xdat = generate_traj(integrator, x_init, tspan, dt);
 
-plot(xdat[3,1,1:10000])
+plot(xdat[3,1:10000,1])
 
 # Aggregate stroboscopic section data
 #Counting parameter
 #Initialize
-Psec = Float64[]
+Psec = Float64[0]
 PsecNext = Float64[] 
 
 #Create Poincaré section data
 for i in 1:numTraj
-   for j in 1:(size(xdat, 3) - 1)  # Loop over all time steps except the last
+   for j in 1:(size(xdat, 2) - 1)  # Loop over all time steps except the last
        if (j == 1) && (i > 1)  # Trajectories start in the section
-           push!(Psec, xdat[i, 1, j])  # Append to Psec
-       elseif (mod(xdat[i, 2, j], 2π / ω) >= 2π / ω - dt && mod(xdat[i, 2, j+1], 2π / ω) <= dt)
-           push!(Psec, xdat[i, 1, j + 1])  # nth iterate
-           push!(PsecNext, xdat[i, 1, j + 1])  # (n+1)st iterate
+           push!(Psec, xdat[i, j, 1])  # Append to Psec
+       elseif (mod(xdat[i,  j, 2,], 2π / ω) >= 2π / ω - dt && mod(xdat[i,  j+1, 2], 2π / ω) <= dt)
+           push!(Psec, xdat[i,  j+1, 1,])  # nth iterate
+           push!(PsecNext, xdat[i,  j+1, 1,])  # (n+1)st iterate
        end
    end
+   Psec = Psec[1:length(Psec)-1];
 end
-Psec = Psec[1:length(Psec)-2];
 # Create the recurrence data
 xn = Psec;
 xnp1 = PsecNext;
-
-size(xn), size(xnp1)
 
 # Create Θ matrix from monomial upto degree 5
 polyorder = 5; # change maximal polynomial order of monomials in library
 Θ = ones((polyorder+1,length(xn))); # constant term
 
-# (print options below will not work if polyorder is not 5)
 for p = 1:polyorder
    Θ[p+1,:] = xn.^p;
 end
 
-size(pinv(Θ))
 xnp1 = reshape(xnp1, (1,length(xnp1)));
 
 total_dim = 1;
-Xi_new = sindy(xnp1, Θ,total_dim);
+Xi_new = sindy(xnp1, Θ,total_dim, 1e-5);
 mons = ["" "x" "x^2" "x^3" "x^4" "x^5"];
-print_model(Xi_new,mons, total_dim)
-
-# Check why we are getting wrong answers here, probably the answer may lies in timespan, or in numerical accuracy or something else
+print_model(Xi_new,mons, total_dim, ["f(x)"])
 
 ## Hopf Normal Form ODE
 function Hopf!(du,u,p,t)
@@ -144,33 +135,27 @@ if numTraj >= 3
    end
 end
 
-size(x_init)
-x_init[1]
-
 prob = ODEProblem(Hopf!, x_init[1], tspan, om)
 integrator = init(prob, reltol = 1e-12, abstol = 1e-12)
 xdat = generate_traj(integrator, x_init, tspan, dt);
-
-init_pt = 1;
-plot(xdat[init_pt,1,:])  # change init to see trajectories from different initial pt
+xdat = xdat[:,1:end-1,:];
 
 # Aggregate Poincare section
-# Counting parameter
-count = 1;
 # Initialize
 Psec = Float64[];
 PsecNext = Float64[];
 push!(Psec, xdat[1,1,1]);
 # Create Poincare section data
 for i = 1:numTraj
-   for j = 1:length(xdat[1,1,:])-1
-       if (xdat[i,2,j] < 0) && (xdat[i,2,j+1] >= 0)
-           push!(Psec,xdat[i,1,j+1]); #nth iterate
-           push!(PsecNext, xdat[i,1,j+1]); #(n+1)st iterate
+   for j = 1:length(xdat[1,:,1])-1
+       if (xdat[i,j,2] < 0) && (xdat[i,j+1,2] >= 0)
+           push!(Psec,xdat[i,j+1,1]); #nth iterate
+           push!(PsecNext, xdat[i,j+1,1]); #(n+1)st iterate
        end
    end
 end
 # Create the recurrence data
+
 Psec = Psec[1:length(Psec)-1];
 xn = Psec;
 xnp1 = PsecNext;
@@ -179,15 +164,13 @@ xnp1 = PsecNext;
 polyorder = 2; # change maximal polynomial order of monomials in library
 Θ = ones((polyorder+1,length(xn))); # constant term
 
-# (print options below will not work if polyorder is not 5)
 for p = 1:polyorder
    Θ[p+1,:] = xn.^p;
 end
 
-size(pinv(Θ))
 xnp1 = reshape(xnp1, (1,length(xnp1)));
 
 total_dim = 1;
-Xi_new = sindy(xnp1, Θ,total_dim);
+Xi_new = sindy(xnp1, Θ,total_dim, 1e-5);
 mons = ["" "x" "x^2" "x^3" "x^4" "x^5"];
-print_model(Xi_new,mons, total_dim)
+print_model(Xi_new,mons, total_dim, ["f(x)"])
