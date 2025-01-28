@@ -62,7 +62,6 @@ xsol = solve(prob, abstol=1e-12, reltol=1e-12, saveat=dt)
 # Add noise
 var = 0.0; # noise variance
 xsol .= xsol .+ sqrt(var)*randn(size(xsol));
-xsol = xsol'; # change dimensions to match theory
 
 # or directly read the file from saved noisy data to reproduce the text
 using MAT
@@ -71,7 +70,7 @@ xsol = read(file, "xsol")
 close(file)
 
 # plot(xsol[1,:], xsol[2,:], xsol[3,:])  # do this if loaded from LorenzNoise.mat file
-plot(xsol)
+plot(xsol, idxs=(1,2,3))
 
 # Estimated Derivatives
 dxdt = (xsol[:,2:end] .- xsol[:,1:end-1]) ./ dt; # Y matrix
@@ -85,8 +84,6 @@ x = xsol[:,1:end-1];  #X matrix
 Θ[8,:] = x[2,:].^2; # y^2 term
 Θ[9,:] = x[2,:].*x[3,:]; # yz term
 Θ[10,:] = x[3,:].^2; # z^2 term
-
-size(Θ[2,:])
 
 dxdt = reshape(dxdt, (3,size(dxdt)[2]))  # to change dxdt from vector to matrix
 
@@ -123,10 +120,10 @@ end
 Xi_new = sindy(dxdt, Θ, 1e-1)
 mons2 = ["" "x" "y" "z" "x^2" "xy" "xz" "y^2" "yz" "z^2"]
 
-function print_model(Xi_new, mons)
+function print_model(Xi_new, mons,print_f=["dx/dt", "dy/dt", "dz/dt"])
     println("Discovered Model using SINDy: ")
     for ind = 1:3
-        println("d" * mons[ind+1] *"/dt = ")
+        println(print_f[ind] * " = ")
         bigcoeffs = abs.(Xi_new[ind,:]) .> 1e-3; # chosen small just to weed out zero coefficients
         for jnd = eachindex(bigcoeffs)
             if bigcoeffs[jnd] == 1
