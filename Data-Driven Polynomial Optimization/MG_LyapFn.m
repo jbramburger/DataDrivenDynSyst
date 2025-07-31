@@ -81,7 +81,8 @@ y2 = linspace(-5,5,N);
 [X,Y] = meshgrid(x2,y2);
 
 % Build Lyapunov function
-[pow, coeff] = getexponentbase(v,x);
+v_num = dot(value(vc),vm);
+[pow, coeff] = getexponentbase(v_num,x);
 lyap = zeros(size(X));
 for i = 1:numel(lyap)
     lyap(i) = lyap(i) + coeff*( X(i).^pow(:,1) .* Y(i).^pow(:,2) );
