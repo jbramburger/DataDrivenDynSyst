@@ -17,7 +17,7 @@ Scripts related to work in Chapter 4 (Data-Driven Polynomial Optimization) requi
 To improve numerical performance, some work related to scripts in Chapter 4 use a Chebyshev function basis instead of monomials. This requires the Chebfun package for MATLAB, which can be freely downloaded at: https://www.chebfun.org/download/
 
 ## **Repository Contents**
-This repository currently contains four folders, each associated to a chapter of the text. They are organized as follows:
+This repository currently contains six folders, each associated to a chapter of the text. They are organized as follows:
 
 - **Chapter 1**: [**Dynamical Systems: Old and New**](https://github.com/jbramburger/DataDrivenDynSyst/tree/main/Dynamical%20Systems%20Old%20and%20New). This folder contains MATLAB scripts to reproduce the results from Chapter 1 of the textbook. More details can be found in the heading of each script. Organization is as follows:
     - `spiral_POD.m` applies proper orthogonal decomposition (POD) to a spiral wave solution of a PDE.
